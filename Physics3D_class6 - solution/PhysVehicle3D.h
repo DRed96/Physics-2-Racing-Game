@@ -52,7 +52,7 @@ public:
 	float GetKmh() const;
 	vec3 GetForwardVector()const;
 public:
-
+	
 	VehicleInfo info;
 	btRaycastVehicle* vehicle;
 };
