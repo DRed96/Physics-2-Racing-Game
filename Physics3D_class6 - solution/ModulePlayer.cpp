@@ -98,6 +98,7 @@ bool ModulePlayer::Start()
 
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(0, 12, 10);
+	isMoving = false;
 	
 	return true;
 }
@@ -114,6 +115,7 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update(float dt)
 {
 	turn = acceleration = brake = 0.0f;
+	isMoving = false;
 
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 	{
@@ -135,9 +137,15 @@ update_status ModulePlayer::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
 		brake = BRAKE_POWER;
+		if (acceleration < 0.0f)//TOSOLVE 1
+			acceleration = -MAX_ACCELERATION;
 	}
 
 	vehicle->ApplyEngineForce(acceleration);
+	
+	if (acceleration != 0.0f)
+		isMoving = true;
+
 	vehicle->Turn(turn);
 	vehicle->Brake(brake);
 

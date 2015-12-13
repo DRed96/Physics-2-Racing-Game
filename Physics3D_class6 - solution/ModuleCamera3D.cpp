@@ -2,17 +2,19 @@
 #include "Application.h"
 #include "PhysBody3D.h"
 #include "ModuleCamera3D.h"
+#include "PhysVehicle3D.h"
 
 ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	CalculateViewMatrix();
 
 	X = vec3(1.0f, 0.0f, 0.0f);
-	Y = vec3(0.0f, 1.0f, 0.0f);
+	Y = vec3(0.0f, 10.0f, 0.0f);
 	Z = vec3(0.0f, 0.0f, 1.0f);
 
 	Position = vec3(0.0f, 0.0f, 5.0f);
 	Reference = vec3(0.0f, 0.0f, 0.0f);
+
 }
 
 ModuleCamera3D::~ModuleCamera3D()
@@ -45,7 +47,7 @@ update_status ModuleCamera3D::Update(float dt)
 	float speed = 3.0f * dt;
 	if(App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 		speed = 8.0f * dt;
-
+	/*
 	if(App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT) newPos.y += speed;
 	if(App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) newPos.y -= speed;
 
@@ -55,9 +57,24 @@ update_status ModuleCamera3D::Update(float dt)
 
 	if(App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) newPos -= X * speed;
 	if(App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) newPos += X * speed;
+	*/
+
+
+	
 
 	Position += newPos;
 	Reference += newPos;
+
+
+	float* matrix = new float[16];
+
+
+	vec3 targetPos = App->player->vehicle->GetPos();
+	vec3 cameraPos = targetPos;
+
+	//cameraPos.y += 1.0f;
+
+	Look(Position, targetPos, true);
 
 	// Mouse motion ----------------
 
@@ -96,6 +113,12 @@ update_status ModuleCamera3D::Update(float dt)
 		Position = Reference + Z * length(Position);
 	}
 
+	if (App->player->isMoving)
+	{
+		vec3 vehicleDirection = App->player->vehicle->GetForwardVector();
+		Position -= vehicleDirection * MAX_ACCELERATION * dt;
+	}
+	
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
 
