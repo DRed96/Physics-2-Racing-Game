@@ -51,7 +51,7 @@ public:
 	void Turn(float degrees);
 	float GetKmh() const;
 public:
-
+	
 	VehicleInfo info;
 	btRaycastVehicle* vehicle;
 };
