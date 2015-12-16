@@ -4,6 +4,9 @@
 #include "ModuleCamera3D.h"
 #include "PhysVehicle3D.h"
 
+//TOCHANGE to .h
+#define CAMERA_DISTANCE 13
+#define CAMERA_HEIGHT 5
 ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	CalculateViewMatrix();
@@ -59,6 +62,9 @@ update_status ModuleCamera3D::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) newPos += X * speed;
 	
 
+
+	Position += newPos;
+	Reference += newPos;
 	
 	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN)
 	{
@@ -69,11 +75,18 @@ update_status ModuleCamera3D::Update(float dt)
 		debug = !debug;
 	}
 
-	Position += newPos;
-	Reference += newPos;
+	if (debug)
+	{
+		// Mouse motion ----------------
 
+		if(App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
+		{
+			int dx = -App->input->GetMouseXMotion();
+			int dy = -App->input->GetMouseYMotion();
 
-	//float* matrix = new float[16];
+			float Sensitivity = 0.25f;
+
+			Position -= Reference;
 
 
 	vec3 targetPos = App->player->vehicle->GetPos();
@@ -94,65 +107,65 @@ update_status ModuleCamera3D::Update(float dt)
 		//------------------
 		vec3 vehicleDirection = App->player->vehicle->GetForwardVector();
 
-		Position.x *= vehicleDirection.x *-1;
-		Position.z *= vehicleDirection.z;
-		if (App->player->isMoving)
-		{
-			
-			//if ()
-		}
-		//------------------
-		
-	}
-	
-	//cameraPos.y += 1.0f;
-
-
-	// Mouse motion ----------------
-
-	if(App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
-	{
-		int dx = -App->input->GetMouseXMotion();
-		int dy = -App->input->GetMouseYMotion();
-
-		float Sensitivity = 0.25f;
-
-		Position -= Reference;
-
-		if(dx != 0)
-		{
-			float DeltaX = (float)dx * Sensitivity;
-
-			X = rotate(X, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-			Y = rotate(Y, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-			Z = rotate(Z, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-		}
-
-		if(dy != 0)
-		{
-			float DeltaY = (float)dy * Sensitivity;
-
-			Y = rotate(Y, DeltaY, X);
-			Z = rotate(Z, DeltaY, X);
-
-			if(Y.y < 0.0f)
+			if(dx != 0)
 			{
-				Z = vec3(0.0f, Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
-				Y = cross(Z, X);
+				float DeltaX = (float)dx * Sensitivity;
+
+
+				X = rotate(X, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+				Y = rotate(Y, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+				Z = rotate(Z, DeltaX, vec3(0.0f, 1.0f, 0.0f));
 			}
+
+			if(dy != 0)
+			{
+				float DeltaY = (float)dy * Sensitivity;
+
+				Y = rotate(Y, DeltaY, X);
+				Z = rotate(Z, DeltaY, X);
+
+				if(Y.y < 0.0f)
+				{
+					Z = vec3(0.0f, Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
+					Y = cross(Z, X);
+				}
+			}
+
+			Position = Reference + Z * length(Position);
+		}
+	}
+	else
+	{
+		btTransform transform = App->player->vehicle->GetBody()->getWorldTransform();
+		btVector3 vehicle_pos = (transform.getOrigin());
+
+		Reference = { vehicle_pos.getX(), vehicle_pos.getY(), vehicle_pos.getZ() };
+		LookAt(Reference);
+
+		btQuaternion* quat = &(transform.getRotation());
+		float angle = quat->getAngle();
+
+		btVector3 a = quat->getAxis();
+		vec3 axis = { a.getX(), a.getY(), a.getZ() };
+
+		if (quat != q)
+		{
+			X = rotate(X, angle, axis);
+			Y = rotate(Y, angle, axis);
+			Z = rotate(Z, angle, axis);
+			q = quat;
 		}
 
-		Position = Reference + Z * length(Position);
+		vec3 c_pos = Reference + Z * CAMERA_DISTANCE;
+
+		if (c_pos.y < Reference.y + CAMERA_HEIGHT)
+		{
+			c_pos.y = Reference.y + CAMERA_HEIGHT;
+		}
+
+		Position = c_pos;
 	}
-	/*
-	
-	if (App->player->isMoving)
-	{
-		vec3 vehicleDirection = App->player->vehicle->GetForwardVector();
-		Position -= vehicleDirection * MAX_ACCELERATION * dt;
-	}
-	
-	*/
+
 
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
@@ -160,6 +173,53 @@ update_status ModuleCamera3D::Update(float dt)
 	return UPDATE_CONTINUE;
 }
 
+
+/*Bad code
+	
+	//float* matrix = new float[16];
+
+
+	//vec3 targetPos = App->player->vehicle->GetPos();
+	//vec3 cameraPos = targetPos;
+	//cameraPos.y += 1.0f;
+
+	/*
+	
+	if (App->player->isMoving)
+	{
+		vec3 vehicleDirection = App->player->vehicle->GetForwardVector();
+		Position -= vehicleDirection * MAX_ACCELERATION * dt;
+	}
+
+	
+	*/
+
+	Position.x = targetPos.x;
+	Position.z = targetPos.z - 20;
+	Position.y = targetPos.y + 5;
+
+	/*
+	Fer que la camera apunti cap on mira el cotxe en un pla, que si puja o baixa no s'alteri
+	Trobar per quin valor s'ha de multiplicar la posició de la camera pq sigui constant. Potser la diferéncia de pixels que s'ha mogut
+	Si la camera está X aprop del cotxe, es manté a aquella distancia.
+	*
+Look(Position, targetPos, true);
+
+//------------------
+vec3 vehicleDirection = App->player->vehicle->GetForwardVector();
+
+Position.x *= vehicleDirection.x *-1;
+Position.z *= vehicleDirection.z;
+if (App->player->isMoving)
+{
+
+
+	//if ()
+}
+//------------------
+
+		
+*/
 // -----------------------------------------------------------------
 void ModuleCamera3D::Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference)
 {

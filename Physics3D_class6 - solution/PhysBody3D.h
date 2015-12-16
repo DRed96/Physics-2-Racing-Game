@@ -35,7 +35,8 @@ public:
 	void SetPos(vec3& newPos);
 	void SetAsSensor(bool is_sensor);
 	bool IsSensor() const;
-	
+	//provisional, to see if it works
+	btRigidBody* GetBody(){ return body; }
 
 private:
 	btRigidBody* body = nullptr;
