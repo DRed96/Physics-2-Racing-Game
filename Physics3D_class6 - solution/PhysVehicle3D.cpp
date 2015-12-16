@@ -96,12 +96,19 @@ float PhysVehicle3D::GetKmh() const
 
 vec3 PhysVehicle3D::GetForwardVector()const
 {
+	
 	btVector3 btvehiclePosition = vehicle->getForwardVector();
-
 	vec3 vehicleForward;
 	vehicleForward.x = btvehiclePosition.m_floats[0];
-	vehicleForward.y = btvehiclePosition.m_floats[1];
+	vehicleForward.y = 0.0f;
 	vehicleForward.z = btvehiclePosition.m_floats[2];
 
 	return vehicleForward;
+}
+
+float PhysVehicle3D::Get_X_Z_Angle()
+{
+	float angle;
+	angle = atan(GetPos().x / GetPos().z);
+	return angle;
 }

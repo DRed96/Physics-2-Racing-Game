@@ -98,10 +98,10 @@ bool ModulePlayer::Start()
 
 	vehicle = App->physics->AddVehicle(car);
 
-	//vehicle->SetPos(0, 12, 10);
+	//vehicle->SetPos(0, 23, 10);
 	isMoving = false;
-
-	vehicle->SetPos(0, 23, 7);
+	
+	vehicle->SetPos(0, 0, 7);
 
 	
 	return true;
