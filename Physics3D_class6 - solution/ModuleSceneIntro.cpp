@@ -30,16 +30,35 @@ bool ModuleSceneIntro::Start()
 	//TOCHANGE: Dirty
 	Cube platform1;
 	createPlatform({ 0.0f, 16.0f, 7.5f }, { 9.0f, 1.0f, 7.0f }, platform1);
-	Cube pl6;
-	createPlatform({ 0.0f, 13.0f, 16.0f }, { 9.0f, 1.0f, 7.0f }, pl6);
-	Cube pl5;
-	createPlatform({ 0.0f, 13.0f, 23.0f }, { 9.0f, 1.0f, 7.0f }, pl5);
-	Cube pl4;
-	createPlatform({ 0.0f, 13.0f, 30.0f }, { 9.0f, 1.0f, 7.0f }, pl4);
+	Cube p9;
+	createPlatform({ 0.0f, 13.0f, 16.0f }, { 9.0f, 1.0f, 7.0f }, p9);
+	Cube pl0;
+	createPlatform({ 0.0f, 13.0f, 23.0f }, { 9.0f, 1.0f, 7.0f }, pl0);
+	Cube pl1;
+	createPlatform({ 0.0f, 13.0f, 30.0f }, { 9.0f, 1.0f, 7.0f }, pl1);
 	Cube pl2;
 	createPlatform({ 0.0f, 13.0f, 37.0f }, { 9.0f, 1.0f, 7.0f }, pl2);
 	Cube pl3;
-	createPlatform({ 2.0f, 14.5f, 39.5f }, {6.0f, 1.0f, 7.0f }, pl3, -23.0f);
+	createPlatform({ 0.0f, 13.0f, 44.0f }, {6.0f, 1.0f, 7.0f }, pl3);
+	Cube pl4;
+	createPlatform({ 0.0f, 13.0f, 51.0f }, { 6.0f, 1.0f, 7.0f }, pl4);
+	Cube pl5;
+	createPlatform({ 0.0f, 13.0f, 58.0f }, { 6.0f, 1.0f, 7.0f }, pl5);
+	Cube pl6;
+	createPlatform({ 0.0f, 13.0f, 65.0f }, { 6.0f, 1.0f, 7.0f }, pl6);
+	Cube pl7;
+	createPlatform({ 0.0f, 13.0f, 72.0f }, { 6.0f, 1.0f, 7.0f }, pl7);
+	Cube pl8;
+	createPlatform({ 0.0f, 13.0f, 79.0f }, { 6.0f, 1.0f, 7.0f }, pl8);
+	Cube pl9;
+	createPlatform({ 0.0f, 13.0f, 86.0f }, { 6.0f, 1.0f, 7.0f }, pl9);
+	Cube p20;
+	createPlatform({ 0.0f, 13.0f, 93.0f }, { 6.0f, 1.0f, 7.0f }, p20);
+	Cube p21;
+	createPlatform({ 0.0f, 13.0f, 100.0f }, { 6.0f, 1.0f, 7.0f }, p21);
+	Cube p22;
+	createPlatform({ 0.0f, 13.0f, 107.0f }, { 6.0f, 1.0f, 7.0f }, p22);
+
 	return ret;
 }
 
@@ -88,4 +107,10 @@ void ModuleSceneIntro::createPlatform(vec3 pos, vec3 _size, Cube& obj, float rot
 	lazyness.add(toAdd);
 	platforms.add(obj);
 	return;
+}
+
+void ModuleSceneIntro::AttachPlatform()
+{
+
+
 }
