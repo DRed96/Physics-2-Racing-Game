@@ -83,11 +83,30 @@ update_status ModuleCamera3D::Update(float dt)
 		Position.x = targetPos.x;
 		Position.z = targetPos.z - 20;
 		Position.y = targetPos.y + 5;
+
+		/*
+		Fer que la camera apunti cap on mira el cotxe en un pla, que si puja o baixa no s'alteri
+		Trobar per quin valor s'ha de multiplicar la posició de la camera pq sigui constant. Potser la diferéncia de pixels que s'ha mogut
+		Si la camera está X aprop del cotxe, es manté a aquella distancia.
+		*/
+		Look(Position, targetPos, true);
+
+		//------------------
+		vec3 vehicleDirection = App->player->vehicle->GetForwardVector();
+
+		Position.x *= vehicleDirection.x *-1;
+		Position.z *= vehicleDirection.z;
+		if (App->player->isMoving)
+		{
+			
+			//if ()
+		}
+		//------------------
+		
 	}
 	
 	//cameraPos.y += 1.0f;
 
-	Look(Position, targetPos, true);
 
 	// Mouse motion ----------------
 
@@ -126,20 +145,8 @@ update_status ModuleCamera3D::Update(float dt)
 		Position = Reference + Z * length(Position);
 	}
 
-	/*
-	Fer que la camera apunti cap on mira el cotxe en un pla, que si puja o baixa no s'alteri
-	Trobar per quin valor s'ha de multiplicar la posició de la camera pq sigui constant. Potser la diferéncia de pixels que s'ha mogut
-	Si la camera está X aprop del cotxe, es manté a aquella distancia.
-	*/
-	//if (App->player->isMoving)
-	//{
-		vec3 vehicleDirection = App->player->vehicle->GetForwardVector();
-		
-		Position.x += Position.x *vehicleDirection.x;
-		Position.z += Position.x *vehicleDirection.z;
-		//if ()
-	//}
 	
+
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
 
