@@ -7,6 +7,17 @@ class btRigidBody;
 class vec3;
 class Module;
 
+
+enum Orientation
+{
+	RIGHT = 0,
+	BACK,
+	LEFT,
+	FRONT,
+	BELOW,
+	TOP
+};
+
 // =================================================
 struct PhysBody3D
 {
@@ -18,8 +29,10 @@ public:
 	void Push(float x, float y, float z);
 	void GetTransform(float* matrix) const;
 	vec3 GetPos()const;
+	vec3 GetSize()const;
 	void SetTransform(const float* matrix) const;
 	void SetPos(float x, float y, float z);
+	void SetPos(vec3& newPos);
 	void SetAsSensor(bool is_sensor);
 	bool IsSensor() const;
 	

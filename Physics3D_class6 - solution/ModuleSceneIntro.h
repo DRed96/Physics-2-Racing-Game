@@ -3,11 +3,13 @@
 #include "p2DynArray.h"
 #include "Globals.h"
 #include "Primitive.h"
+#include "PhysBody3D.h"
 
 #define MAX_SNAKE 2
 
 struct PhysBody3D;
 struct PhysMotor3D;
+
 
 class ModuleSceneIntro : public Module
 {
@@ -21,9 +23,10 @@ public:
 
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 	//Platform Factory
-	void createPlatform(vec3 position, vec3 size, Cube& obj, float rot = 0.0f, float rot_x = 1.0f,
+	PhysBody3D* createPlatform(vec3 position, vec3 size, Cube& obj, float rot = 0.0f, float rot_x = 1.0f,
 						float rot_y = 0.0f, float rot_z = 0.0f, float mass = 0.0f);
-	void AttachPlatform();
+
+	bool AttachPlatform(PhysBody3D& obj, PhysBody3D& obj2, Cube& cObj1, Cube& cObj2, Orientation orientation);
 
 public:
 	Cube s;

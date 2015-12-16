@@ -89,7 +89,7 @@ update_status ModuleCamera3D::Update(float dt)
 		Trobar per quin valor s'ha de multiplicar la posició de la camera pq sigui constant. Potser la diferéncia de pixels que s'ha mogut
 		Si la camera está X aprop del cotxe, es manté a aquella distancia.
 		*/
-		Look(Position, targetPos, true);
+		//Look(Position, targetPos, true);
 
 		//------------------
 		vec3 vehicleDirection = App->player->vehicle->GetForwardVector();
@@ -144,15 +144,15 @@ update_status ModuleCamera3D::Update(float dt)
 
 		Position = Reference + Z * length(Position);
 	}
-
 	/*
+	
 	if (App->player->isMoving)
 	{
 		vec3 vehicleDirection = App->player->vehicle->GetForwardVector();
 		Position -= vehicleDirection * MAX_ACCELERATION * dt;
 	}
-	*/	
-
+	
+	*/
 
 	// Recalculate matrix -------------
 	CalculateViewMatrix();

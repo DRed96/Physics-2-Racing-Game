@@ -48,6 +48,13 @@ void PhysBody3D::SetPos(float x, float y, float z)
 	body->setWorldTransform(t);
 }
 
+void PhysBody3D::SetPos(vec3& vec)
+{
+	btTransform t = body->getWorldTransform();
+	t.setOrigin(btVector3(vec.x, vec.y, vec.z));
+	body->setWorldTransform(t);
+}
+
 vec3 PhysBody3D::GetPos()const
 {
 	btTransform t = body->getWorldTransform();
@@ -56,6 +63,15 @@ vec3 PhysBody3D::GetPos()const
 	return v3;
 }
 
+vec3 PhysBody3D::GetSize()const
+{
+	btVector3 t = body->getCollisionShape()->getLocalScaling();
+	vec3 vec;
+	vec.x = t.m_floats[0];
+	vec.y = t.m_floats[1];
+	vec.z = t.m_floats[2];
+	return vec;
+}
 
 
 // ---------------------------------------------------------
