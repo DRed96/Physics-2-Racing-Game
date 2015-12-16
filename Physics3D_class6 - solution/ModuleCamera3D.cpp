@@ -59,22 +59,54 @@ update_status ModuleCamera3D::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) newPos += X * speed;
 	
 
-
 	
+	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_DOWN)
+	{
+		char degug = '\0';
+	}
+	if (App->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
+	{
+		debug = !debug;
+	}
 
 	Position += newPos;
 	Reference += newPos;
 
 
-	float* matrix = new float[16];
+	//float* matrix = new float[16];
 
 
 	vec3 targetPos = App->player->vehicle->GetPos();
-	vec3 cameraPos = targetPos;
+	//vec3 cameraPos = targetPos;
+	if (!debug)
+	{
+		Position.x = targetPos.x;
+		Position.z = targetPos.z - 20;
+		Position.y = targetPos.y + 5;
 
+		/*
+		Fer que la camera apunti cap on mira el cotxe en un pla, que si puja o baixa no s'alteri
+		Trobar per quin valor s'ha de multiplicar la posició de la camera pq sigui constant. Potser la diferéncia de pixels que s'ha mogut
+		Si la camera está X aprop del cotxe, es manté a aquella distancia.
+		*/
+		Look(Position, targetPos, true);
+
+		//------------------
+		vec3 vehicleDirection = App->player->vehicle->GetForwardVector();
+
+		Position.x *= vehicleDirection.x *-1;
+		Position.z *= vehicleDirection.z;
+		if (App->player->isMoving)
+		{
+			
+			//if ()
+		}
+		//------------------
+		
+	}
+	
 	//cameraPos.y += 1.0f;
 
-	Look(Position, targetPos, true);
 
 	// Mouse motion ----------------
 
@@ -112,13 +144,16 @@ update_status ModuleCamera3D::Update(float dt)
 
 		Position = Reference + Z * length(Position);
 	}
+
 	/*
 	if (App->player->isMoving)
 	{
 		vec3 vehicleDirection = App->player->vehicle->GetForwardVector();
 		Position -= vehicleDirection * MAX_ACCELERATION * dt;
 	}
-	*/
+	*/	
+
+
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
 
@@ -177,4 +212,11 @@ void ModuleCamera3D::CalculateViewMatrix()
 {
 	ViewMatrix = mat4x4(X.x, Y.x, Z.x, 0.0f, X.y, Y.y, Z.y, 0.0f, X.z, Y.z, Z.z, 0.0f, -dot(X, Position), -dot(Y, Position), -dot(Z, Position), 1.0f);
 	ViewMatrixInverse = inverse(ViewMatrix);
+}
+//HoI! Iterate the camera position to match the vehicle orientation!
+void ModuleCamera3D::alignWithVehicle()
+{
+	/*CameraAngle - VehicleAngle*/
+	App->player->vehicle->GetForwardVector();
+//	for ()
 }
