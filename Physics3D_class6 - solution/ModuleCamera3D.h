@@ -3,7 +3,7 @@
 #include "Globals.h"
 #include "glmath.h"
 
-
+class btQuaternion;
 class ModuleCamera3D : public Module
 {
 public:
@@ -18,13 +18,14 @@ public:
 	void LookAt(const vec3 &Spot);
 	void Move(const vec3 &Movement);
 	float* GetViewMatrix();
-	bool debug = false;
+	
 private:
 	void alignWithVehicle();
 	void CalculateViewMatrix();
 
 public:
-	
+	bool debug = false;
+	btQuaternion* q;
 	vec3 X, Y, Z, Position, Reference;
 
 private:
