@@ -104,7 +104,15 @@ update_status ModuleSceneIntro::Update(float dt)
 
 void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
-	p2List_item<PhysBody3D*> *tmp = sensors.getFirst();
+	//It is necessary to be in both bodies?
+	if (body1->check_point_num > 0)
+	{
+		Checkpoint(body1->check_point_num);
+	}
+	if (body2->check_point_num > 0)
+	{
+		Checkpoint(body2->check_point_num);
+	}
 	LOG("Hit!");
 }
 
@@ -175,6 +183,35 @@ bool ModuleSceneIntro::AttachPlatform(PhysBody3D& obj, PhysBody3D& obj2, Cube& c
 
 
 	return ret;
+}
 
+int ModuleSceneIntro::Checkpoint(int current)
+{
+	LOG("Checking collision!!");
+	switch (antiCheat)
+	{
+		case 0:
+			if (current == 1)
+				antiCheat = current;
+			break;
+		case 1:
+			if (current == 2)
+				antiCheat = current;
+			break;
+		case 2:
+			if (current == 3)
+				antiCheat = current;
+			break;
+		case 3:
+			if (current == 4)
+				antiCheat = current;
+			break;
+	}
+	return antiCheat;
+}
 
+void ModuleSceneIntro::declareChecks()
+{
+	PhysBody3D* tmp;
+	createPlatform({ 0.0f, 0.0f, 7.5f }, { 9.0f, 1.0f, 7.0f },NULL,true,0,true);
 }

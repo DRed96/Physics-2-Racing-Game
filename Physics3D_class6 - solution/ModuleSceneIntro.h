@@ -23,12 +23,15 @@ public:
 
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 	//Platform Factory
-	Cube* createPlatform(vec3 position, vec3 size,PhysBody3D* pBody = NULL, bool isSensor = false, int check = -1, bool isVisible = true, float rot = 0.0f, float rot_x = 1.0f,
+	Cube* createPlatform(vec3 position, vec3 size,PhysBody3D* pBody = NULL, bool isSensor = false, int checkpoint = -1, bool isVisible = true, float rot = 0.0f, float rot_x = 1.0f,
 						float rot_y = 0.0f, float rot_z = 0.0f, float mass = 0.0f);
 	bool AttachPlatform(PhysBody3D& obj, PhysBody3D& obj2, Cube& cObj1, Cube& cObj2, Orientation orientation);
+	//Checkpoint creation
+	void declareChecks();
+	//Method that avoids player scoring if going backwards
+	int Checkpoint(int);
 
 public:
-	
 	Cube s;
 	PhysBody3D* sensor;
 	//List of all the elements that must be rendered
@@ -38,8 +41,7 @@ public:
 	p2List<PhysBody3D*> sensors;
 
 	vec3 standardSize;
-	//Is it necessary a list of sensors?
-	
+	int antiCheat;
 };
 /*PhysBody3D* createPlatform(vec3 position, vec3 size, Cube& obj, float rot = 0.0f, float rot_x = 1.0f,
 	float rot_y = 0.0f, float rot_z = 0.0f, float mass = 0.0f);*/
