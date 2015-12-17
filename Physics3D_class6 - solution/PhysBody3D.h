@@ -3,6 +3,12 @@
 
 #include "p2List.h"
 
+enum collisionStates
+{
+	COL_IN,
+	COL_OUT
+};
+
 class btRigidBody;
 class vec3;
 class Module;
@@ -23,8 +29,9 @@ public:
 	void SetAsSensor(bool is_sensor);
 	bool IsSensor() const;
 	//provisional, to see if it works
-	btRigidBody* GetBody(){ return body; }
-
+	const btRigidBody* GetBody(){ return body; }
+	//TOCHANGE: Make a struct checkpoint?
+	int check_point_num;
 private:
 	btRigidBody* body = nullptr;
 	bool is_sensor = false;
@@ -32,5 +39,5 @@ private:
 public:
 	p2List<Module*> collision_listeners;
 };
-
+// =================================================
 #endif // __PhysBody3D_H__
