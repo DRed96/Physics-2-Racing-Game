@@ -165,7 +165,7 @@ bool ModuleSceneIntro::Start()
 	posPlane.z += sizeTile.z / 4;
 	CreatePlane(posPlane, sizeTile, 2, 2);
 
-	antiCheat = 0;
+	laps = antiCheat = 0;
 	declareChecks();
 
 	return ret;
@@ -254,6 +254,7 @@ update_status ModuleSceneIntro::Update(float dt)
 
 void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
+	
 	//It is necessary to be in both bodies?
 	if (body1->check_point_num >= 0)
 	{
@@ -263,7 +264,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 	{
 		Checkpoint(body2->check_point_num);
 	}
-	LOG("Hit!");
+	
 }
 
 //Platform Factory
@@ -370,7 +371,6 @@ bool ModuleSceneIntro::AttachPlatform(PhysBody3D* obj, PhysBody3D* obj2, Cube* c
 
 int ModuleSceneIntro::Checkpoint(int current)
 {
-	LOG("Checking collision!!");
 	switch (antiCheat)
 	{
 		case 0:
@@ -386,8 +386,11 @@ int ModuleSceneIntro::Checkpoint(int current)
 				antiCheat = current;
 			break;
 		case 3:
-			if (current == 4)
+			if (current == 0)
+			{
 				antiCheat = current;
+				laps++;
+			}
 			break;
 	}
 	LOG("%d", antiCheat);
@@ -397,12 +400,12 @@ int ModuleSceneIntro::Checkpoint(int current)
 void ModuleSceneIntro::declareChecks()
 {
 	PhysBody3D* tmp;
-	createPlatform({ 0.0f, 3.0f, -15.0f }, { 9.0f, 1.0f, 7.0f },tmp,true,1,true);
+	createPlatform({ 0.0f, 3.0f, 20.0f }, { 9.0f, 1.0f, 7.0f },tmp,true,0,true);
 	sensors.add(tmp);
-	createPlatform({ 0.0f, 3.0f, -30.0f }, { 9.0f, 1.0f, 7.0f }, tmp, true, 2, true);
+	createPlatform({ 0.0f, 3.0f, 35.0f }, { 9.0f, 1.0f, 7.0f }, tmp, true,1, true);
 	sensors.add(tmp);
-	createPlatform({ 5.0f, 3.0f, -45.0f }, { 9.0f, 1.0f, 7.0f }, tmp, true, 3, true);
+	createPlatform({ 5.0f, 3.0f, 45.0f }, { 9.0f, 1.0f, 7.0f }, tmp, true, 2, true);
 	sensors.add(tmp);
-	createPlatform({ 0.0f, 3.0f, -60.0f }, { 9.0f, 1.0f, 7.0f }, tmp, true, 4, true);
+	createPlatform({ 0.0f, 3.0f, 60.0f }, { 9.0f, 1.0f, 7.0f }, tmp, true, 3, true);
 	sensors.add(tmp);
 }

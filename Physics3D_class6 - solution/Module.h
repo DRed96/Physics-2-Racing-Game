@@ -3,6 +3,9 @@
 class Application;
 struct PhysBody3D;
 
+enum collisionStates;
+
+
 class Module
 {
 private :

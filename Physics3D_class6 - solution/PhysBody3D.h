@@ -3,11 +3,6 @@
 
 #include "p2List.h"
 
-enum collisionStates
-{
-	COL_IN,
-	COL_OUT
-};
 
 class btRigidBody;
 class vec3;
