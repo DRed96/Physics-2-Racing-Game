@@ -47,21 +47,10 @@ update_status ModuleCamera3D::Update(float dt)
 	// Now we can make this movememnt frame rate independant!
 
 	vec3 newPos(0,0,0);
-	float speed = 3.0f * dt;
-	if(App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
-		speed = 8.0f * dt;
-	
-	if(App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT) newPos.y += speed;
-	if(App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) newPos.y -= speed;
+	float speed = 1.0f * dt;
 
-	if(App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) newPos -= Z * speed;
-	if(App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) newPos += Z * speed;
-
-
-	if(App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) newPos -= X * speed;
-	if(App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) newPos += X * speed;
-	
-
+	//vec3 targetPos = App->player->vehicle->GetPos();
+	//vec3 cameraPos = targetPos;
 
 	Position += newPos;
 	Reference += newPos;
@@ -78,8 +67,20 @@ update_status ModuleCamera3D::Update(float dt)
 	if (debug)
 	{
 		// Mouse motion ----------------
+		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
+			speed = 8.0f * dt;
 
-		if(App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
+		if (App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT) newPos.y += speed;
+		if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) newPos.y -= speed;
+
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) newPos -= Z * speed;
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) newPos += Z * speed;
+
+
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) newPos -= X * speed;
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) newPos += X * speed;
+
+		if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
 		{
 			int dx = -App->input->GetMouseXMotion();
 			int dy = -App->input->GetMouseYMotion();
@@ -88,30 +89,6 @@ update_status ModuleCamera3D::Update(float dt)
 
 			Position -= Reference;
 
-			if(dx != 0)
-			{
-				float DeltaX = (float)dx * Sensitivity;
-
-				X = rotate(X, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-				Y = rotate(Y, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-				Z = rotate(Z, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-			}
-
-			if(dy != 0)
-			{
-				float DeltaY = (float)dy * Sensitivity;
-
-				Y = rotate(Y, DeltaY, X);
-				Z = rotate(Z, DeltaY, X);
-
-				if(Y.y < 0.0f)
-				{
-					Z = vec3(0.0f, Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
-					Y = cross(Z, X);
-				}
-			}
-
-			Position = Reference + Z * length(Position);
 		}
 	}
 	else
@@ -145,6 +122,8 @@ update_status ModuleCamera3D::Update(float dt)
 
 		Position = c_pos;
 	}
+
+
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
 
@@ -160,12 +139,18 @@ update_status ModuleCamera3D::Update(float dt)
 	//vec3 targetPos = App->player->vehicle->GetPos();
 	//vec3 cameraPos = targetPos;
 	//cameraPos.y += 1.0f;
+
 	/*
+	
 	if (App->player->isMoving)
 	{
 		vec3 vehicleDirection = App->player->vehicle->GetForwardVector();
 		Position -= vehicleDirection * MAX_ACCELERATION * dt;
 	}
+
+	
+	*
+
 	Position.x = targetPos.x;
 	Position.z = targetPos.z - 20;
 	Position.y = targetPos.y + 5;
@@ -185,11 +170,12 @@ Position.z *= vehicleDirection.z;
 if (App->player->isMoving)
 {
 
+
 	//if ()
 }
 //------------------
 
-	*	
+		
 */
 // -----------------------------------------------------------------
 void ModuleCamera3D::Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference)

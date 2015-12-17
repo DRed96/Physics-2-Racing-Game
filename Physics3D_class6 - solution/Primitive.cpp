@@ -8,7 +8,7 @@
 #pragma comment (lib, "glut/glut32.lib")
 
 // ------------------------------------------------------------
-Primitive::Primitive() : transform(IdentityMatrix), color(White), wire(false), axis(false), type(PrimitiveTypes::Primitive_Point)
+Primitive::Primitive() : transform(IdentityMatrix), color(Green), wire(false), axis(false), type(PrimitiveTypes::Primitive_Point)
 {}
 
 // ------------------------------------------------------------
@@ -31,7 +31,7 @@ void Primitive::Render() const
 		glBegin(GL_LINES);
 
 		glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
-
+		
 		glVertex3f(0.0f, 0.0f, 0.0f); glVertex3f(1.0f, 0.0f, 0.0f);
 		glVertex3f(1.0f, 0.1f, 0.0f); glVertex3f(1.1f, -0.1f, 0.0f);
 		glVertex3f(1.1f, 0.1f, 0.0f); glVertex3f(1.0f, -0.1f, 0.0f);
@@ -49,7 +49,7 @@ void Primitive::Render() const
 		glVertex3f(-0.05f, 0.1f, 1.05f); glVertex3f(0.05f, 0.1f, 1.05f);
 		glVertex3f(0.05f, 0.1f, 1.05f); glVertex3f(-0.05f, -0.1f, 1.05f);
 		glVertex3f(-0.05f, -0.1f, 1.05f); glVertex3f(0.05f, -0.1f, 1.05f);
-
+		
 		glEnd();
 
 		glLineWidth(1.0f);
@@ -86,6 +86,12 @@ void Primitive::SetPos(float x, float y, float z)
 {
 	transform.translate(x, y, z);
 }
+
+void Primitive::SetPos(vec3 vec)
+{
+	transform.translate(vec.x, vec.y, vec.z);
+}
+
 
 // ------------------------------------------------------------
 void Primitive::SetRotation(float angle, const vec3 &u)
@@ -156,6 +162,8 @@ void Cube::InnerRender() const
 
 	glEnd();
 }
+
+
 
 // SPHERE ============================================
 Sphere::Sphere() : Primitive(), radius(1.0f)
