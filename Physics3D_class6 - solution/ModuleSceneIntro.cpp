@@ -92,12 +92,12 @@ update_status ModuleSceneIntro::Update(float dt)
 	s.Render();
 	
 	//forReal->SetTransform(&platform1.transform);
-	/*p2List_item<Cube> * tmp = platforms.getFirst();
+	p2List_item<Cube*> * tmp = platforms.getFirst();
 	while (tmp)
 	{
-		tmp->data.Render();
+		tmp->data->Render();
 		tmp = tmp->next;
-	}*/
+	}
 	
 	return UPDATE_CONTINUE;
 }
