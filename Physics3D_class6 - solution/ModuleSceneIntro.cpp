@@ -28,9 +28,6 @@ bool ModuleSceneIntro::Start()
 	sensor->collision_listeners.add(this);
 
 	standardSize = { 9.0f, 1.0f, 7.0f };
-
-	//TOCHANGE: Dirty
-
 	
 	PhysBody3D* pbody0 = NULL;
 	PhysBody3D* pbody1 = NULL;
@@ -268,6 +265,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 }
 
 //Platform Factory
+
 
 Cube* ModuleSceneIntro::createPlatform(vec3 pos, vec3 _size, PhysBody3D*& pbody,  bool isSensor, int check, bool isVisible, float rot_angle, float rot_x, float rot_y, float rot_z, float mass)
 {

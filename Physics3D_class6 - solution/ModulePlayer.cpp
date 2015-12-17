@@ -4,7 +4,7 @@
 #include "Primitive.h"
 #include "PhysVehicle3D.h"
 #include "PhysBody3D.h"
-
+#include "Timer.h"
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
 {
 	turn = acceleration = brake = 0.0f;
@@ -99,72 +99,120 @@ bool ModulePlayer::Start()
 	vehicle = App->physics->AddVehicle(car);
 
 	//vehicle->SetPos(0, 23, 10);
-	isMoving = false;
-	
 	vehicle->SetPos(0, 0, 7);
-
 	
+	timer = new Timer();
+	isStarting = true;
+
+	finish = false;
+	victory = false;
+
 	return true;
 }
+
+
 
 // Unload assets
 bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading player");
 
+	delete(timer);
+
 	return true;
+}
+
+update_status ModulePlayer::PreUpdate(float dt)
+{
+	update_status ret = UPDATE_CONTINUE;
+	checkVictory(victory,finish);
+	if(finish == true)
+	{
+		if (victory)
+		{
+			/*
+			*Victoria
+			*/
+		}
+		else
+		{
+			/*
+			*Derrota
+			*/
+		}
+	}
+	return ret;
 }
 
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
-	turn = acceleration = brake = 0.0f;
-	isMoving = false;
-
-	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	if (isStarting)
 	{
-		acceleration = MAX_ACCELERATION;
+		//TOCHANGE: 
+		//if (timer->Read() > 3000)
+			isStarting = false;
+			timer->Start();
 	}
-
-	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	else
 	{
-		if(turn < TURN_DEGREES)
-			turn +=  TURN_DEGREES;
+		turn = acceleration = brake = 0.0f;
+
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		{
+			acceleration = MAX_ACCELERATION;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+		{
+			if (turn < TURN_DEGREES)
+				turn += TURN_DEGREES;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+		{
+			if (turn > -TURN_DEGREES)
+				turn -= TURN_DEGREES;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		{
+			brake = BRAKE_POWER;
+			if (acceleration < 0.0f)//TOSOLVE 1
+				acceleration = -MAX_ACCELERATION;
+		}
+
+		vehicle->ApplyEngineForce(acceleration);
+
+		vehicle->Turn(turn);
+		vehicle->Brake(brake);
+
+		vehicle->Render();
+
+		char title[80];
+		float seconds = (timer->Read() / 1000);
+		seconds += (timer->Read() / 10000);
+		sprintf_s(title, "%.1f Km/h Laps: %d Current Time: %.2f", vehicle->GetKmh(), App->scene_intro->laps, seconds);
+		App->window->SetTitle(title);
 	}
-
-	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-	{
-		if(turn > -TURN_DEGREES)
-			turn -= TURN_DEGREES;
-	}
-
-	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-	{
-		brake = BRAKE_POWER;
-		if (acceleration < 0.0f)//TOSOLVE 1
-			acceleration = -MAX_ACCELERATION;
-	}
-
-	vehicle->ApplyEngineForce(acceleration);
-	
-	if (acceleration != 0.0f)
-		isMoving = true;
-
-	vehicle->Turn(turn);
-	vehicle->Brake(brake);
-
-	vehicle->Render();
-
-	char title[80];
-	sprintf_s(title, "%.1f Km/h Laps: %d", vehicle->GetKmh(),App->scene_intro->laps);
-	App->window->SetTitle(title);
-
 	return UPDATE_CONTINUE;
 }
 
 
-void ModulePlayer::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
+
+
+void ModulePlayer::checkVictory(bool victory, bool finish)
 {
-	LOG("Playa");
+	Uint32 currentMs = timer->Read();
+	if(currentMs <= MAX_TIME && App->scene_intro->laps >= MAX_LAPS)
+	{
+		victory = true;
+		finish = true;
+	}
+	else if (currentMs >MAX_TIME)
+	{
+		finish = true;
+	}
+	return;
 }
 

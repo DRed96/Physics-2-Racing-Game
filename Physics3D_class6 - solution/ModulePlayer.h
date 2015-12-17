@@ -4,11 +4,13 @@
 #include "p2Point.h"
 
 struct PhysVehicle3D;
-
+class Timer;
 #define MAX_ACCELERATION 1000.0f
 #define TURN_DEGREES 15.0f * DEGTORAD
 #define BRAKE_POWER 1000.0f
-
+//Victory Condtions
+#define MAX_LAPS 4
+#define MAX_TIME 7200
 class ModulePlayer : public Module
 {
 public:
@@ -16,14 +18,21 @@ public:
 	virtual ~ModulePlayer();
 
 	bool Start();
+	update_status PreUpdate(float dt);
 	update_status Update(float dt);
+	
 	bool CleanUp();
-	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
+
+	//Check Victory
+	void checkVictory(bool _victory, bool _finish);
 public:
-	int currentCheckpoint;
 	PhysVehicle3D* vehicle;
 	float turn;
 	float acceleration;
 	float brake;
-	bool isMoving;
+private:
+	Timer* timer;
+	bool isStarting;
+	bool victory;
+	bool finish;
 };
