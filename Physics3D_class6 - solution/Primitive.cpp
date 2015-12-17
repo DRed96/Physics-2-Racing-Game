@@ -163,7 +163,10 @@ void Cube::InnerRender() const
 	glEnd();
 }
 
-
+vec3 Cube::GetSize()const
+{
+	return size;
+}
 
 // SPHERE ============================================
 Sphere::Sphere() : Primitive(), radius(1.0f)

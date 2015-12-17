@@ -122,7 +122,7 @@ update_status ModuleCamera3D::Update(float dt)
 		btVector3 vehicle_pos = (transform.getOrigin());
 
 		Reference = { vehicle_pos.getX(), vehicle_pos.getY(), vehicle_pos.getZ() };
-		LookAt(Reference);
+		//LookAt(Reference);
 
 		btQuaternion* quat = &(transform.getRotation());
 		float angle = quat->getAngle();
