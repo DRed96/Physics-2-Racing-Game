@@ -107,7 +107,8 @@ bool ModulePlayer::Start()
 	//7,20,15.75
 	//-5.0f, 26.0f, 0.0f
 	//3,36,22
-	vehicle->SetPos(-5.0f, 26.0f, 0.0f);
+	//7,20,15.75
+	vehicle->SetPos(15.0f, 26.0f, -25.0f);
 
 
 	return true;
@@ -178,7 +179,6 @@ update_status ModulePlayer::Update(float dt)
 
 		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 		{
-			brake = BRAKE_POWER;
 		//	if (acceleration > 0.0f) //TOSOLVE 1
 				acceleration = -MAX_ACCELERATION*2;
 				
@@ -190,12 +190,22 @@ update_status ModulePlayer::Update(float dt)
 		
 
 		vehicle->Render();
+		
+		if (vehicle->GetPos().y < 2.5)
+		{
+			acceleration = acceleration = 0;
+			brake = BRAKE_POWER;
+			vehicle->Brake(brake);
+			vehicle->SetPos(18.0f, 30.0f, -25.0f);
 
+			vehicle->Brake(0.0);
+		}
 		char title[80];
 		float seconds = (timer->Read() / 1000);
 		float residue = ((timer->Read() % 1000));
 		seconds += residue / 1000;
-
+		
+	
 		sprintf_s(title, "%.1f Km/h Laps: %d Current Time: %.2f Time Limit %d", vehicle->GetKmh(), App->scene_intro->laps, seconds, (MAX_TIME/1000));
 		App->window->SetTitle(title);
 	}

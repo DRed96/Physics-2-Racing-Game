@@ -13,6 +13,7 @@
 
 #define MAX_CUBES 40
 #define MAX_PBODYS 40
+#define CHECKS 5
 
 struct PhysBody3D;
 struct PhysMotor3D;
@@ -35,10 +36,11 @@ public:
 	
 	Cube* createPlatform(vec3 position, vec3 size, PhysBody3D*& pBody, float rot = 0.0f, float rot_x = 1.0f,
 		float rot_y = 0.0f, float rot_z = 0.0f, bool isSensor = false, int check = -1, bool isVisible = true, float mass = 0.0f);
+
 	Cube* createPlatformC(vec3 position, vec3 size, PhysBody3D*& pBody, float rot = 0.0f, float rot_x = 1.0f,
 		float rot_y = 0.0f, float rot_z = 0.0f, bool isSensor = false, int check = -1, bool isVisible = true, Color = White, float mass = 0.0f);
 
-	Cube* createSensor(vec3 position, vec3 size, PhysBody3D*& pBody, int check = -1, bool isVisible = false,
+	Cube* CreateSensor(vec3 position, vec3 size, PhysBody3D*& pBody, int check = -1, bool isVisible = false,
 		float rot = 0.0f, float rot_x = 1.0f, float rot_y = 0.0f, float rot_z = 0.0f, float mass = 0.0f);
 
 	bool AttachPlatform(PhysBody3D* obj, PhysBody3D* obj2, Cube* cObj1, Cube* cObj2, Orientation orientation);
@@ -77,8 +79,9 @@ public:
 	vec3 standardSize;
 	int antiCheat;
 private:
-	Cube* cubes[MAX_CUBES];
-	PhysBody3D* pbodys[MAX_PBODYS];
+	vec3 checkpoints[CHECKS];
+		//Cube* cubes[MAX_CUBES];
+		//PhysBody3D* pbodys[MAX_PBODYS];
 	//Declare all the Cubes and PhysBodys that will be needed
 	void createAllElements();
 };
