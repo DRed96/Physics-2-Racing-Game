@@ -30,99 +30,20 @@ bool ModuleSceneIntro::Start()
 	standardSize = { 9.0f, 1.0f, 7.0f };
 
 	//Heavy Loading function
-	createAllElements();
-	/*
-	
-	PhysBody3D* pbody0 = NULL;
-	PhysBody3D* pbody1 = NULL;
-	PhysBody3D* pbody2 = NULL;
-	PhysBody3D* pbody3 = NULL;
-	PhysBody3D* pbody4 = NULL;
-	PhysBody3D* pbody5 = NULL;
-	PhysBody3D* pbody6 = NULL;
-	PhysBody3D* pbody7 = NULL;
-	PhysBody3D* pbody8 = NULL;
-	PhysBody3D* pbody9 = NULL;
-	PhysBody3D* pbody10 = NULL;
-	PhysBody3D* pbody11 = NULL;
-	PhysBody3D* pbody12 = NULL;
-	PhysBody3D* pbody13 = NULL;
-	PhysBody3D* pbody14 = NULL;
-	PhysBody3D* pbody15 = NULL;
-
-
-	Cube* cube0;
-	Cube* cube1;
-	Cube* cube2;
-	Cube* cube3;
-	Cube* cube4;
-	Cube* cube5;
-	Cube* cube6;
-	Cube* cube7;
-	Cube* cube8;
-	Cube* cube9;
-	Cube* cube10;
-	Cube* cube11;
-	Cube* cube12;
-	Cube* cube13;
-	Cube* cube14;
-	Cube* cube15;*/
-
-		/*
-	cube0 = createPlatform({ 0.0f, 16.0f, 7.5f }, { 9.0f, 1.0f, 7.0f },  pbody0);
-	cube1 = createPlatform({ 0.0f, 13.0f, 16.0f }, { 9.0f, 1.0f, 7.0f }, pbody1);
-	
-	cube2 = createPlatform({ 0.0f, 13.0f, 23.0f }, { 9.0f, 1.0f, 7.0f }, pbody2);
-	
-	cube3 = createPlatform({ 0.0f, 13.0f, 30.0f }, { 9.0f, 1.0f, 7.0f }, pbody3);
-																		 
-	cube4 = createPlatform({ 0.0f, 13.0f, 37.0f }, { 9.0f, 1.0f, 7.0f }, pbody4);
-																		 
-	cube5 = createPlatform({ 0.0f, 13.0f, 44.0f }, { 9.0f, 1.0f, 7.0f }, pbody5);
-																		 
-	cube6 = createPlatform({ 0.0f, 13.0f, 51.0f }, { 9.0f, 1.0f, 7.0f }, pbody6);
-																		 
-	cube7 = createPlatform({ 0.0f, 13.0f, 58.0f }, { 9.0f, 1.0f, 7.0f }, pbody7);
-																		 
-	cube8 = createPlatform({ 0.0f, 13.0f, 65.0f }, { 6.0f, 1.0f, 7.0f }, pbody8);
-																		 
-	cube9 = createPlatform({ 0.0f, 13.0f, 72.0f }, { 6.0f, 1.0f, 7.0f }, pbody9);
-	
-	cube10 = createPlatform({ 0.0f, 13.0f, 79.0f }, { 6.0f, 1.0f, 7.0f }, pbody10);
-	
-	cube11 = createPlatform({ 0.0f, 13.0f, 86.0f }, { 6.0f, 1.0f, 7.0f }, pbody11);
-	
-	cube12 = createPlatform({ 0.0f, 13.0f, 93.0f }, { 6.0f, 1.0f, 7.0f }, pbody12);
-	
-	cube13 = createPlatform({ 0.0f, 13.0f, 100.0f }, { 6.0f, 1.0f, 7.0f },pbody13);
-	
-	cube14 = createPlatform({ 0.0f, 13.0f, 107.0f }, { 6.0f, 1.0f, 7.0f },pbody14);
+	//createAllElements();
 
 	
-
-	AttachPlatform(pbody0, pbody1, cube0, cube1, RIGHT);
-	AttachPlatform(pbody0, pbody2, cube0, cube2, LEFT);
-	AttachPlatform(pbody0, pbody3, cube0, cube3, BACK);
-	AttachPlatform(pbody0, pbody4, cube0, cube4, FRONT);
-	AttachPlatform(pbody0, pbody5, cube0, cube5, BELOW);
-	AttachPlatform(pbody0, pbody6, cube0, cube6, TOP);
-	AttachPlatform(pbody6, pbody7, cube6, cube7, TOP);
-	AttachPlatform(pbody7, pbody8, cube7, cube8, TOP);
-	AttachPlatform(pbody8, pbody9, cube8, cube9, TOP);
-	AttachPlatform(pbody9, pbody10, cube9, cube10, TOP);
-	AttachPlatform(pbody10, pbody11, cube10, cube11, TOP);
-	*/
-
 	circuitConstruction();
+
 	vec3 posPlane(0);
 	posPlane.x = 0.0f;
 	posPlane.y = 12.0f;
 	posPlane.z = 0.0f;
 
 	vec3 sizeTile(0);
-	sizeTile.x = 3.0f;
-	sizeTile.y = 3.0f;
-	sizeTile.z = 3.0f;
+	sizeTile.x = 4.0f;
+	sizeTile.y = 0.5f;
+	sizeTile.z = 7.0f;
 
 	float angle = 45.0f;
 
@@ -131,27 +52,28 @@ bool ModuleSceneIntro::Start()
 	Rotation.y = 1.0f;
 	Rotation.z = 0.0f;
 
-	/*
+	
 	CreatePlane(posPlane, sizeTile, 1, 1);
 	posPlane.x = 0.0f;
 	posPlane.y = 5.0f;
 	posPlane.z = 0.0f;
-	CreatePlane(posPlane, sizeTile, 2, 2);
+	CreatePlane(posPlane, sizeTile, 1, 1);
 	posPlane.x = 0.0f;
 	posPlane.y = 8.0f;
 	posPlane.z = 0.0f;
-	CreatePlane(posPlane, sizeTile, 3, 3);
+	CreatePlane(posPlane, sizeTile, 1, 1);
 	posPlane.x = 0.0f;
 	posPlane.y = 11.0f;
 	posPlane.z = 0.0f;
 	
-	CreatePlane(posPlane, sizeTile, 4, 4);*/
-	/*
+	CreatePlane(posPlane, sizeTile,1, 1);
+	
 	posPlane.x = 0.0f;
 	posPlane.y = 14.0f;
-	posPlane.z = 0.0f;*/
-		//vec3 finalPos = CreatePlane(posPlane, sizeTile, 6, 6, angle, Rotation);
-	/*posPlane.x += sizeTile.x/4;
+	posPlane.z = 0.0f;
+	
+	/*vec3 finalPos = CreatePlane(posPlane, sizeTile, 6, 6, angle, Rotation);
+	posPlane.x += sizeTile.x/4;
 	posPlane.y = 17.0f;
 	posPlane.z += sizeTile.z/4;
 	CreatePlane(posPlane, sizeTile, 5, 5);
@@ -167,7 +89,7 @@ bool ModuleSceneIntro::Start()
 	posPlane.y = 26.0f;
 	posPlane.z += sizeTile.z / 4;
 	CreatePlane(posPlane, sizeTile, 2, 2);
-	*/
+*/
 	laps = antiCheat = 0;
 	declareChecks();
 	vec3 rotation = {0.0f, 1.0f, 0.0f};
@@ -436,93 +358,49 @@ int ModuleSceneIntro::Checkpoint(int current)
 void ModuleSceneIntro::declareChecks()
 {
 	PhysBody3D* tmp;
-
 	createSensor({ 0.0f, 3.0f, 20.0f }, standardSize,tmp, 0,true);
-	sensors.add(tmp);
 	createSensor({ 0.0f, 3.0f, 35.0f }, standardSize, tmp, 1, true);
-	sensors.add(tmp);
 	createSensor({ 0.0f, 3.0f, 45.0f }, standardSize, tmp, 2, true);
-	sensors.add(tmp);
 	createSensor({ 0.0f, 3.0f, 60.0f }, standardSize, tmp, 3, true);
-	sensors.add(tmp);
+
+	return;
 }
+
 
 void ModuleSceneIntro::circuitConstruction()
 {
-	//cubes.;
-	/*PhysBody3D* pb0 = NULL;
-	PhysBody3D* pb1 = NULL;
-	PhysBody3D* pb2 = NULL;
-	PhysBody3D* pb3 = NULL;
-	PhysBody3D* pb4 = NULL;
-	PhysBody3D* pb5 = NULL;
-	PhysBody3D* pb6 = NULL;
-	PhysBody3D* pb7 = NULL;
-	PhysBody3D* pb8 = NULL;
-	PhysBody3D* pb9 = NULL;
-	PhysBody3D* pb10 = NULL;
-	PhysBody3D* pb11 = NULL;
-	PhysBody3D* pb12 = NULL;
-	PhysBody3D* pb13 = NULL;
-	PhysBody3D* pb14 = NULL;
-	PhysBody3D* pb15 = NULL;
+
+	/*cubes[0] = createPlatform({ 0.0f, 16.0f, 7.5f }, { 9.0f, 1.0f, 7.0f }, pbodys[0]);
+	cubes[1] = createPlatform({ 0.0f, 13.0f, 16.0f }, { 9.0f, 1.0f, 7.0f }, pbodys[1]);
+	cubes[2] = createPlatform({ 0.0f, 13.0f, 23.0f }, { 9.0f, 1.0f, 7.0f }, pbodys[2]);
+	cubes[3] = createPlatform({ 0.0f, 13.0f, 30.0f }, { 9.0f, 1.0f, 7.0f }, pbodys[3]);
+	cubes[4] = createPlatform({ 0.0f, 13.0f, 37.0f }, { 9.0f, 1.0f, 7.0f }, pbodys[4]);
+	cubes[5] = createPlatform({ 0.0f, 13.0f, 44.0f }, { 9.0f, 1.0f, 7.0f }, pbodys[5]);
+	cubes[6] = createPlatform({ 0.0f, 13.0f, 51.0f }, { 9.0f, 1.0f, 7.0f }, pbodys[6]);
+	cubes[7] = createPlatform({ 0.0f, 13.0f, 58.0f }, { 9.0f, 1.0f, 7.0f }, pbodys[7]);
+	cubes[8] = createPlatform({ 0.0f, 13.0f, 65.0f }, { 6.0f, 1.0f, 7.0f }, pbodys[8]);
+	cubes[9] = createPlatform({ 0.0f, 13.0f, 72.0f }, { 6.0f, 1.0f, 7.0f }, pbodys[9]);
+	cubes[10] = createPlatform({ 0.0f, 13.0f, 79.0f }, { 6.0f, 1.0f, 7.0f }, pbodys[10]);
+	cubes[11] = createPlatform({ 0.0f, 13.0f, 86.0f }, { 6.0f, 1.0f, 7.0f }, pbodys[11]);
+	cubes[12] = createPlatform({ 0.0f, 13.0f, 93.0f }, { 6.0f, 1.0f, 7.0f }, pbodys[12]);
+	cubes[13] = createPlatform({ 0.0f, 13.0f, 100.0f }, { 6.0f, 1.0f, 7.0f }, pbodys[13]);
+	cubes[14] = createPlatform({ 0.0f, 13.0f, 107.0f }, { 6.0f, 1.0f, 7.0f }, pbodys[14]);
 
 
-	Cube* c16;
-	Cube* c17;
-	Cube* c18;
-	Cube* c19;
-	Cube* c20;
-	Cube* c21;
-	Cube* c22;
-	Cube* c23;
-	Cube* c24;
-	Cube* c25;
-	Cube* c26;
-	Cube* c27;
-	Cube* c28;
-	Cube* c29;
-	Cube* c30;
-	Cube* c31;*/
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	AttachPlatform(pbodys[0], pbodys[1], cubes[0], cubes[1], RIGHT);
+	AttachPlatform(pbodys[0], pbodys[2], cubes[0], cubes[2], RIGHT);
+	AttachPlatform(pbodys[0], pbodys[3], cubes[0], cubes[3], RIGHT);
+	AttachPlatform(pbodys[0], pbodys[4], cubes[0], cubes[4], RIGHT);
+	AttachPlatform(pbodys[0], pbodys[5], cubes[0], cubes[5], RIGHT);
+	AttachPlatform(pbodys[0], pbodys[6], cubes[0], cubes[6], RIGHT);
+	AttachPlatform(pbodys[0], pbodys[7], cubes[6], cubes[7], RIGHT);
+	AttachPlatform(pbodys[0], pbodys[8], cubes[7], cubes[8], RIGHT);
+	AttachPlatform(pbodys[0], pbodys[9], cubes[8], cubes[9], RIGHT);
+	AttachPlatform(pbodys[0], pbodys[10], cubes[9], cubes[10], RIGHT);
+	AttachPlatform(pbodys[0], pbodys[11], cubes[10], cubes[11], RIGHT);
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-}
-
-void ModuleSceneIntro::createAllElements()
-{
-	//Allocate Cubes
-	for (int i = 0; i++, i <= CUBE_LIMIT;)
-	{
-		Cube* tmp = NULL;
-		cubes.PushBack(tmp);
-	}
-	for (int i2 = 0; i2++, i2 <= BODY_LIMIT;)
-	{
-		PhysBody3D* tmp= NULL;
-		pbodies.PushBack(tmp);
-	}
-	//Allocate PhysBodyes
+	*/
 }
 /*
 cube0 = createPlatform({ 0.0f, 16.0f, 7.5f }, { 9.0f, 1.0f, 7.0f },  pbody0);
@@ -568,3 +446,4 @@ AttachPlatform(pbody8, pbody9, cube8, cube9, TOP);
 AttachPlatform(pbody9, pbody10, cube9, cube10, TOP);
 AttachPlatform(pbody10, pbody11, cube10, cube11, TOP);
 */
+
