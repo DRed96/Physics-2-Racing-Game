@@ -52,7 +52,7 @@ bool ModuleSceneIntro::Start()
 	PhysBody3D* tmp;
 	//TMP PLATFORM
 	CreatePlaneC(vec3{ -2.5f, 25.0f, 0.0f }, sizeTile, 1, 1, Red);
-			//createPlatform(vec3{ 0.5f, 50.0f, 0.0f }, standardSize,tmp,50.0f,0.0f, 1.0f,0.0f);
+			
 	
 			//Plane petit 1
 	/*CreatePlane(posPlane, sizeTile, 1, 1);
@@ -108,13 +108,15 @@ bool ModuleSceneIntro::Start()
 	CreatePlane(lowPyramidPos, sizeTile, 3, 3);
 
 	//Pyramid Roads ---------------
-		//Road 1
+		
+	//Road 1
 	vec3 proadVec1 = highPyramidPos;
 	proadVec1.x += sizeTile.x* 1.5f;
 	proadVec1.z -= sizeTile.z * 2.5f;
 	//7,20,15.75
-	CreatePlaneC({proadVec1.x , proadVec1.y, proadVec1.z}, sizeTile, 10,3,Red);
+	CreatePlaneC({proadVec1.x , proadVec1.y, proadVec1.z}, sizeTile, 9,3,Red);
 	//Road 2
+
 	vec3 proadVec2 = lowPyramidPos;
 	proadVec2.x += (sizeTile.x/2 * 3);
 	proadVec2.z += (sizeTile.z * 0.3);
@@ -155,10 +157,46 @@ bool ModuleSceneIntro::Start()
 	CreatePlaneC(proadVec5, sizeTile, 5, 3, Blue);
 
 
+
+	/*vec3 proadVec2 = lowPyramidPos;
+	proadVec2.x -= (sizeTile.x* 4.0f);
+	proadVec2.z += (sizeTile.z * 0.3);
+	CreatePlaneC({ proadVec2.x , proadVec2.y, proadVec2.z }, sizeTile, 2, 10, Blue);
+	*/
+
 	//Pyramid Ramps ---------------
 	
-	vec3 rotation = {0.0f, 1.0f, 0.0f};
+	//Base&Ramp1
+	vec3 pBase1 = highPyramidPos;
+	pBase1.x += (sizeTile.x *2);
+	pBase1.z += (sizeTile.z * 4.5);
+	CreatePlaneC({ pBase1.x , pBase1.y, pBase1.z },  sizeTile , 8, 9, Red);
+	
+	vec3 pRamp1 = pBase1;
+	pRamp1.x += (sizeTile.x * 2);
+	pRamp1.z += (sizeTile.z * 3.43);
+	pRamp1.y += (sizeTile.x * 0.8);
+	createPlatformC({ pRamp1.x , pRamp1.y, pRamp1.z }, {6.0f,0.5f,15.0f}, tmp, 40.0f, 1.0f, 0.0f, 0.0f, false, -1, true, Blue);
 
+	//Base&Ramp2
+	//15,28.,1.75
+	vec3 pBase2 = pBase1;
+	pBase2.x += (sizeTile.x * 2);
+	pBase2.z -= (sizeTile.z/2 * 9);
+	pBase2.x -= 1.50f;
+	pBase2.y += 8.0f;
+	CreatePlaneC({ pBase2.x , pBase2.y, pBase2.z }, sizeTile, 8, 9, Red);
+	//9z,8y
+	vec3 pRamp2 = pBase2;
+	pRamp2.x += ((sizeTile.x)  * 3.65);
+	pRamp2.z += ((sizeTile.z / 2) *2 );
+	pRamp2.z += 1.75;
+	pRamp2.y += 4.0f;
+	createPlatformC({ pRamp2.x , pRamp2.y, pRamp2.z }, { 15.0f ,0.5f,6.0f }, tmp, -33.0f, 0.0f, 0.0f, 1.0f, false, -1, true, Blue);
+
+
+	//Otter Stuff----------
+	vec3 rotation = {0.0f, 1.0f, 0.0f};
 	//Ramp
 	vec3 sizeTileRamp = sizeTile;
 	vec3 posRamp = mediumLowPyramidPos;
