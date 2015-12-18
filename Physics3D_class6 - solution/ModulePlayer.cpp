@@ -106,10 +106,8 @@ bool ModulePlayer::Start()
 	victory = false;
 	//7,20,15.75
 	//-5.0f, 26.0f, 0.0f
-
-	vehicle->SetPos(17.0f, 44.0f, 20.1f);
-	
-
+	//3,36,22
+	vehicle->SetPos(-5.0f, 26.0f, 0.0f);
 
 
 	return true;
@@ -197,7 +195,8 @@ update_status ModulePlayer::Update(float dt)
 		float seconds = (timer->Read() / 1000);
 		float residue = ((timer->Read() % 1000));
 		seconds += residue / 1000;
-		sprintf_s(title, "%.1f Km/h Laps: %d Current Time: %.2f", vehicle->GetKmh(), App->scene_intro->laps, seconds);
+
+		sprintf_s(title, "%.1f Km/h Laps: %d Current Time: %.2f Time Limit %d", vehicle->GetKmh(), App->scene_intro->laps, seconds, (MAX_TIME/1000));
 		App->window->SetTitle(title);
 	}
 	return UPDATE_CONTINUE;
