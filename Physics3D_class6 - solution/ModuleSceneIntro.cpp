@@ -67,51 +67,7 @@ bool ModuleSceneIntro::Start()
 		Cube* cube14;
 		Cube* cube15;
 
-		/*
-	cube0 = createPlatform({ 0.0f, 16.0f, 7.5f }, { 9.0f, 1.0f, 7.0f },  pbody0);
-	cube1 = createPlatform({ 0.0f, 13.0f, 16.0f }, { 9.0f, 1.0f, 7.0f }, pbody1);
 	
-	cube2 = createPlatform({ 0.0f, 13.0f, 23.0f }, { 9.0f, 1.0f, 7.0f }, pbody2);
-	
-	cube3 = createPlatform({ 0.0f, 13.0f, 30.0f }, { 9.0f, 1.0f, 7.0f }, pbody3);
-																		 
-	cube4 = createPlatform({ 0.0f, 13.0f, 37.0f }, { 9.0f, 1.0f, 7.0f }, pbody4);
-																		 
-	cube5 = createPlatform({ 0.0f, 13.0f, 44.0f }, { 9.0f, 1.0f, 7.0f }, pbody5);
-																		 
-	cube6 = createPlatform({ 0.0f, 13.0f, 51.0f }, { 9.0f, 1.0f, 7.0f }, pbody6);
-																		 
-	cube7 = createPlatform({ 0.0f, 13.0f, 58.0f }, { 9.0f, 1.0f, 7.0f }, pbody7);
-																		 
-	cube8 = createPlatform({ 0.0f, 13.0f, 65.0f }, { 6.0f, 1.0f, 7.0f }, pbody8);
-																		 
-	cube9 = createPlatform({ 0.0f, 13.0f, 72.0f }, { 6.0f, 1.0f, 7.0f }, pbody9);
-	
-	cube10 = createPlatform({ 0.0f, 13.0f, 79.0f }, { 6.0f, 1.0f, 7.0f }, pbody10);
-	
-	cube11 = createPlatform({ 0.0f, 13.0f, 86.0f }, { 6.0f, 1.0f, 7.0f }, pbody11);
-	
-	cube12 = createPlatform({ 0.0f, 13.0f, 93.0f }, { 6.0f, 1.0f, 7.0f }, pbody12);
-	
-	cube13 = createPlatform({ 0.0f, 13.0f, 100.0f }, { 6.0f, 1.0f, 7.0f },pbody13);
-	
-	cube14 = createPlatform({ 0.0f, 13.0f, 107.0f }, { 6.0f, 1.0f, 7.0f },pbody14);
-
-	
-
-	AttachPlatform(pbody0, pbody1, cube0, cube1, RIGHT);
-	AttachPlatform(pbody0, pbody2, cube0, cube2, LEFT);
-	AttachPlatform(pbody0, pbody3, cube0, cube3, BACK);
-	AttachPlatform(pbody0, pbody4, cube0, cube4, FRONT);
-	AttachPlatform(pbody0, pbody5, cube0, cube5, BELOW);
-	AttachPlatform(pbody0, pbody6, cube0, cube6, TOP);
-	AttachPlatform(pbody6, pbody7, cube6, cube7, TOP);
-	AttachPlatform(pbody7, pbody8, cube7, cube8, TOP);
-	AttachPlatform(pbody8, pbody9, cube8, cube9, TOP);
-	AttachPlatform(pbody9, pbody10, cube9, cube10, TOP);
-	AttachPlatform(pbody10, pbody11, cube10, cube11, TOP);
-	*/
-
 	vec3 posPlane(0);
 	posPlane.x = 0.0f;
 	posPlane.y = 5.0f;
@@ -128,49 +84,107 @@ bool ModuleSceneIntro::Start()
 	Rotation.x = 0.0f;
 	Rotation.y = 1.0f;
 	Rotation.z = 0.0f;
-
+	
 	/*
 	CreatePlane(posPlane, sizeTile, 1, 1);
 	posPlane.x = 0.0f;
 	posPlane.y = 5.0f;
 	posPlane.z = 0.0f;
-	CreatePlane(posPlane, sizeTile, 2, 2);
+	*/
+	
+	CreatePlane(posPlane, sizeTile, 4, 4, angle, Rotation);
 	posPlane.x = 0.0f;
 	posPlane.y = 8.0f;
 	posPlane.z = 0.0f;
-	CreatePlane(posPlane, sizeTile, 3, 3);
+	/*CreatePlane(posPlane, sizeTile, 3, 3);
 	posPlane.x = 0.0f;
 	posPlane.y = 11.0f;
 	posPlane.z = 0.0f;
 	
-	CreatePlane(posPlane, sizeTile, 4, 4);*/
+	CreatePlane(posPlane, sizeTile, 4, 4);
 	posPlane.x = 0.0f;
 	posPlane.y = 14.0f;
 	posPlane.z = 0.0f;
-	vec3 finalPos = CreatePlane(posPlane, sizeTile, 6, 6, angle, Rotation);
-	posPlane.x += sizeTile.x/4;
-	posPlane.y = 17.0f;
-	posPlane.z += sizeTile.z/4;
-	CreatePlane(posPlane, sizeTile, 5, 5);
-	posPlane.x += sizeTile.x / 4;
-	posPlane.y = 20.0f;
-	posPlane.z += sizeTile.z / 4;
-	CreatePlane(posPlane, sizeTile, 4, 4);
-	posPlane.x += sizeTile.x / 4;
-	posPlane.y = 23.0f;
-	posPlane.z += sizeTile.z / 4;
-	CreatePlane(posPlane, sizeTile, 3, 3);
-	posPlane.x += sizeTile.x / 4;
-	posPlane.y = 26.0f;
-	posPlane.z += sizeTile.z / 4;
-	CreatePlane(posPlane, sizeTile, 2, 2);
+	*/
+
+	vec3 posPyramid1;
+	posPyramid1.x = -30.0f;
+	posPyramid1.y = 1.6f;
+	posPyramid1.z = 30.0f;
+	
+	vec3 sizePyramid1;
+	sizePyramid1.x = 0.5f;
+	sizePyramid1.y = 0.125f;
+	sizePyramid1.z = 0.5f;
+
+	//Pyramids
+
+
+	
+
+	
+
+	
+
+	int levels;
+	levels = 6;
+	CreatePyramidNormal(posPyramid1, sizePyramid1, levels);
+	//CreateWeridSculpture(posPyramid1, sizePyramid1, levels);
+
 
 	vec3 rotation = {0.0f, 1.0f, 0.0f};
 
-	CreateCurve30(finalPos, sizeTile, 3, rotation);
+	vec3 posSlowGrid1;
+	posSlowGrid1.x = 15.0f;
+	posSlowGrid1.y = 15.0f;
+	posSlowGrid1.z = 15.0f;
+
+
+	CreateSlowGrid(posSlowGrid1, sizeTile, 4, 4, angle, Rotation);
+
 
 	return ret;
 }
+
+void ModuleSceneIntro::CreatePyramidUpsideDown(vec3 posPyramid, vec3 sizeTile, int levels, float angle, vec3 Rotation)
+{
+
+	for (int i = 0; i <= levels; i++)
+	{
+		vec3 finalPos = CreatePlane(posPyramid, sizeTile, i, i, angle, Rotation);
+		posPyramid.x -= sizeTile.x / 4;
+		posPyramid.y += sizeTile.y;
+		posPyramid.z -= sizeTile.z / 4;
+	}
+
+}
+
+void ModuleSceneIntro::CreatePyramidNormal(vec3 posPyramid, vec3 sizeTile, int levels, float angle, vec3 Rotation)
+{
+
+	for (int i = levels; i > 0; i--)
+	{
+		vec3 finalPos = CreatePlane(posPyramid, sizeTile, i, i, angle, Rotation);
+		posPyramid.x += sizeTile.x / 4;
+		posPyramid.y += sizeTile.y;
+		posPyramid.z += sizeTile.z / 4;
+	}
+
+}
+
+void ModuleSceneIntro::CreateWeridSculpture(vec3 pos, vec3 sizeTile, int levels, float angle, vec3 Rotation)
+{
+	CreatePyramidUpsideDown(pos, sizeTile, levels);
+
+	pos.x -= ((levels / 2) * sizeTile.x / 2);
+	pos.y -= ((levels / 2) * sizeTile.y / 2);
+	pos.z -= ((levels / 2) * sizeTile.z / 2);
+
+	CreatePyramidNormal(pos, sizeTile, levels);
+
+
+}
+
 
 void ModuleSceneIntro::CreateCurve45(vec3 pos, vec3 sizeTile, int rows, float angle)
 {
@@ -200,7 +214,7 @@ vec3 ModuleSceneIntro::CreatePlane(vec3 positionPlane, vec3 sizeTile, int rows, 
 
 	vec3 posTile = positionPlane;
 
-	for (i = 0; i < rows; i++)
+	for (i = 0; i <= rows; i++)
 	{
 	
 		for (j = 0; j < cols; j++)
@@ -231,7 +245,6 @@ vec3 ModuleSceneIntro::CreatePlane(vec3 positionPlane, vec3 sizeTile, int rows, 
 		{
 			vec.z += nextCol;
 			vec.x = positionPlane.x;
-
 		}
 		
 	
@@ -247,6 +260,69 @@ vec3 ModuleSceneIntro::CreatePlane(vec3 positionPlane, vec3 sizeTile, int rows, 
 
 
 }
+
+
+vec3 ModuleSceneIntro::CreateSlowGrid(vec3 positionPlane, vec3 sizeTile, int rows, int cols, float angle, vec3 rot)
+{
+	vec3 vec = positionPlane;
+	vec.y = 0.0f;
+	float nextRow = sizeTile.x;
+	float nextCol = sizeTile.z;
+	int i, j;
+
+	vec3 posTile = positionPlane;
+
+	for (i = 0; i < rows; i++)
+	{
+
+		for (j = 0; j < cols; j++)
+		{
+			PhysBody3D* pbody;
+
+
+			Cube* cube = createPlatform((positionPlane + vec), sizeTile, pbody, angle, rot.x, rot.y, rot.z);
+			if (angle != 0)
+			{
+				vec.x += nextRow/2;
+			}
+			else
+			{
+				vec.x += nextRow;
+			}
+
+		}
+
+		if (angle != 0)
+		{
+			vec.z += nextCol/2;
+			vec.x = positionPlane.x;
+		}
+		else
+		{
+			vec.z += nextCol/2;
+			vec.x = positionPlane.x;
+		}
+
+
+	}
+
+	if (angle != 0)
+	{
+		vec.x -= nextCol / 2 * j;
+		vec.z -= nextRow / 2 * j;
+	}
+
+	return (positionPlane + vec);
+
+
+}
+
+
+
+
+
+
+
 
 // Load assets
 bool ModuleSceneIntro::CleanUp()
