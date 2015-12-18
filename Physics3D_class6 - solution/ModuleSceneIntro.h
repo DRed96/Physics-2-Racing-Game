@@ -35,6 +35,8 @@ public:
 	
 	Cube* createPlatform(vec3 position, vec3 size, PhysBody3D*& pBody, float rot = 0.0f, float rot_x = 1.0f,
 		float rot_y = 0.0f, float rot_z = 0.0f, bool isSensor = false, int check = -1, bool isVisible = true, float mass = 0.0f);
+	Cube* createPlatformC(vec3 position, vec3 size, PhysBody3D*& pBody, float rot = 0.0f, float rot_x = 1.0f,
+		float rot_y = 0.0f, float rot_z = 0.0f, bool isSensor = false, int check = -1, bool isVisible = true, Color = White, float mass = 0.0f);
 
 	Cube* createSensor(vec3 position, vec3 size, PhysBody3D*& pBody, int check = -1, bool isVisible = false,
 		float rot = 0.0f, float rot_x = 1.0f, float rot_y = 0.0f, float rot_z = 0.0f, float mass = 0.0f);
@@ -42,6 +44,8 @@ public:
 	bool AttachPlatform(PhysBody3D* obj, PhysBody3D* obj2, Cube* cObj1, Cube* cObj2, Orientation orientation);
 
 	vec3 CreatePlane(vec3 positionPlane, vec3 sizeTile, int rows, int cols, float angle = 0.0f, vec3 rotation = {0.0f,0.0f,0.0f});
+	//With COlor
+	vec3 CreatePlaneC(vec3 positionPlane, vec3 sizeTile, int rows, int cols, Color = White, float angle = 0.0f, vec3 rotation = { 0.0f,0.0f,0.0f });
 
 	void CreateCurve45(vec3 pos, vec3 sizeTile, int rows, float angle);
 
