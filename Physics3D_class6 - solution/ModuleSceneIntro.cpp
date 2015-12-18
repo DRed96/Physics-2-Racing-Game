@@ -122,13 +122,16 @@ bool ModuleSceneIntro::Start()
 
 
 	//Ramp
-	/*vec3 posRamp = mediumLowPyramidPos;
+	vec3 posRamp = mediumLowPyramidPos;
+	posRamp.x += sizeTile.x/2;
+	posRamp.z -= sizeTile.x/2;
+
 	PhysBody3D* rampBody;
-	float angleRamp = -30;
+	float angleRamp = 45.0f;
 	vec3 axisRamp = {1.0f,0.0f,0.0f};
 	createPlatform(posRamp, sizeTile, rampBody, angleRamp, axisRamp.x, axisRamp.y, axisRamp.z);
 	
-	*/
+	
 
 
 	//CreateCurve30(finalPos, sizeTile, 3, rotation);
