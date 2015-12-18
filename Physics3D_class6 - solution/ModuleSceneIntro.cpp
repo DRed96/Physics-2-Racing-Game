@@ -116,9 +116,44 @@ bool ModuleSceneIntro::Start()
 	CreatePlaneC({proadVec1.x , proadVec1.y, proadVec1.z}, sizeTile, 10,3,Red);
 	//Road 2
 	vec3 proadVec2 = lowPyramidPos;
-	proadVec2.x -= (sizeTile.x* 4.0f);
+	proadVec2.x += (sizeTile.x/2 * 3);
 	proadVec2.z += (sizeTile.z * 0.3);
-	CreatePlaneC({ proadVec2.x , proadVec2.y, proadVec2.z }, sizeTile, 2, 10, Blue);
+	CreatePlaneC({ proadVec2.x , proadVec2.y, proadVec2.z }, sizeTile, 2, 30, Blue);
+	//Road 3
+	
+	vec3 proadVec3 = proadVec2;
+	proadVec3.x += (sizeTile.x/2 * 30);
+
+
+	CreatePlaneC(proadVec3, sizeTile, 7, 4, Blue);
+
+	vec3 bumpPos = proadVec3;
+	bumpPos.x += (sizeTile.y / 2 * 3);
+	bumpPos.y += (sizeTile.y);
+	bumpPos.z += (sizeTile.z / 2 * 3);
+	
+	
+	CreatePyramidNormal(bumpPos, { 0.3f, 0.2f, 0.7f }, 3);
+
+	vec3 proadVec4 = proadVec3;
+	proadVec4.z += (sizeTile.z / 2 * 2);
+	proadVec4.y -= (sizeTile.z / 2);
+
+
+
+	CreatePlaneC(proadVec4, sizeTile, 10, 3, Blue);
+	//proadVec4.x = ;
+	//proadVec4.y = ;
+	//proadVec4.z = ;
+
+	
+
+	vec3 proadVec5 = proadVec4;
+	proadVec5.x += (sizeTile.x / 2 * 3);
+
+
+	CreatePlaneC(proadVec5, sizeTile, 5, 3, Blue);
+
 
 	//Pyramid Ramps ---------------
 	
@@ -159,9 +194,9 @@ bool ModuleSceneIntro::Start()
 	posPyramid1.z = 30.0f;
 	
 	vec3 sizePyramid1;
-	sizePyramid1.x = 0.5f;
-	sizePyramid1.y = 0.125f;
-	sizePyramid1.z = 0.5f;
+	sizePyramid1.x = 5.0f;
+	sizePyramid1.y = 5.0f;
+	sizePyramid1.z = 5.0f;
 
 	//Pyramids
 	int levels;
