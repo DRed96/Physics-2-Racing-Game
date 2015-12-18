@@ -77,7 +77,7 @@ bool ModuleSceneIntro::Start()
 	posPlane.z = 0.0f;*/
 	
 	//Grid
-	//vec3 finalPos = CreatePlane(posPlane, sizeTile, 6, 6, angle, Rotation);
+	vec3 finalPos = CreatePlane(posPlane, sizeTile, 6, 6, angle, Rotation);
 
 
 
@@ -164,6 +164,10 @@ bool ModuleSceneIntro::Start()
 	posRamp.x += sizeTile.x/2;
 	//posRamp.y += sizeTile.y;
 	posRamp.z -= sizeTile.x/2;
+
+
+
+	
 
 	sizeTileRamp.z = 20;
 	PhysBody3D* rampBody;
