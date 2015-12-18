@@ -3,11 +3,6 @@
 
 #include "p2List.h"
 
-enum collisionStates
-{
-	COL_IN,
-	COL_OUT
-};
 
 class btRigidBody;
 class vec3;
@@ -48,7 +43,6 @@ public:
 private:
 	btRigidBody* body = nullptr;
 	bool is_sensor = false;
-
 public:
 	p2List<Module*> collision_listeners;
 };

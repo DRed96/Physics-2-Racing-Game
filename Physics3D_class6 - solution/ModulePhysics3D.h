@@ -6,6 +6,14 @@
 
 #include "Bullet/src/btBulletDynamicsCommon.h"
 
+enum collisionStates
+{
+	COL_IN,
+	COL_OUT,
+	COL_UNK
+};
+
+
 // Recommended scale is 1.0f == 1 meter, no less than 0.2 objects
 #define GRAVITY btVector3(0.0f, -10.0f, 0.0f) 
 
@@ -39,7 +47,7 @@ public:
 private:
 
 	bool debug;
-
+	collisionStates currentState;
 	btDefaultCollisionConfiguration*	collision_conf;
 	btCollisionDispatcher*				dispatcher;
 	btBroadphaseInterface*				broad_phase;

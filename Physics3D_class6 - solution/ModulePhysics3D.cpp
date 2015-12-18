@@ -65,7 +65,7 @@ bool ModulePhysics3D::Start()
 		btRigidBody* body = new btRigidBody(rbInfo);
 		world->addRigidBody(body);
 	}
-
+	currentState = COL_UNK;
 	return true;
 }
 
@@ -86,28 +86,29 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 		{
 			PhysBody3D* pbodyA = (PhysBody3D*)obA->getUserPointer();
 			PhysBody3D* pbodyB = (PhysBody3D*)obB->getUserPointer();
-
-			if(pbodyA && pbodyB)
+			
+			if (pbodyA && pbodyB)
 			{
-				p2List_item<Module*>* item = pbodyA->collision_listeners.getFirst();
-				while(item)
-				{
-					item->data->OnCollision(pbodyA, pbodyB);
-					item = item->next;
-				}
+					p2List_item<Module*>* item = pbodyA->collision_listeners.getFirst();
+					while (item)
+					{
+						item->data->OnCollision(pbodyA, pbodyB);
+						item = item->next;
+					}
 
-				item = pbodyB->collision_listeners.getFirst();
-				while(item)
-				{
-					item->data->OnCollision(pbodyB, pbodyA);
-					item = item->next;
+					item = pbodyB->collision_listeners.getFirst();
+					while (item)
+					{
+						item->data->OnCollision(pbodyB, pbodyA);
+						item = item->next;
+					}
 				}
-			}
+			}	
+			
+			
 		}
-	}
-
 	return UPDATE_CONTINUE;
-}
+	}
 
 // ---------------------------------------------------------
 update_status ModulePhysics3D::Update(float dt)

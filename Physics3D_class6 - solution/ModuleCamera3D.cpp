@@ -4,9 +4,7 @@
 #include "ModuleCamera3D.h"
 #include "PhysVehicle3D.h"
 
-//TOCHANGE to .h
-#define CAMERA_DISTANCE 13
-#define CAMERA_HEIGHT 5
+
 ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	CalculateViewMatrix();
@@ -122,7 +120,7 @@ update_status ModuleCamera3D::Update(float dt)
 		btVector3 vehicle_pos = (transform.getOrigin());
 
 		Reference = { vehicle_pos.getX(), vehicle_pos.getY(), vehicle_pos.getZ() };
-		//LookAt(Reference);
+		LookAt(Reference);
 
 		btQuaternion* quat = &(transform.getRotation());
 		float angle = quat->getAngle();
