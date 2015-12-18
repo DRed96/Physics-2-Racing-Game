@@ -7,6 +7,12 @@
 
 #define MAX_SNAKE 2
 
+
+#define CAMERA_DISTANCE 15
+#define CAMERA_HEIGHT 6
+
+#define CUBE_LIMIT 40
+#define BODY_LIMIT 40
 struct PhysBody3D;
 struct PhysMotor3D;
 
@@ -25,8 +31,7 @@ public:
 	//Platform Factory
 
 	//bool AttachPlatform(PhysBody3D& obj, PhysBody3D& obj2, Cube& cObj1, Cube& cObj2, Orientation orientation);
-	//Checkpoint creation
-	void declareChecks();
+
 	//Method that avoids player scoring if going backwards
 	int Checkpoint(int);
 	
@@ -43,7 +48,15 @@ public:
 	void CreateCurve45(vec3 pos, vec3 sizeTile, int rows, float angle);
 
 	void CreateCurve30(vec3 pos, vec3 sizeTile, int rows, vec3 rot);
+	
 
+
+	//Checkpoint creation
+	void declareChecks();
+
+	//Checkpoint creation
+	void circuitConstruction();
+	
 public:
 	Cube s;
 	PhysBody3D* sensor;
@@ -53,8 +66,15 @@ public:
 	int laps;
 	p2List<PhysBody3D*> sensors;
 
+
+	p2DynArray<Cube*> cubes;
+	p2DynArray<PhysBody3D*> pbodies;
+
 	vec3 standardSize;
 	int antiCheat;
+private:
+	//Declare all the Cubes and PhysBodys that will be needed
+	void createAllElements();
 };
 /*PhysBody3D* createPlatform(vec3 position, vec3 size, Cube& obj, float rot = 0.0f, float rot_x = 1.0f,
 	float rot_y = 0.0f, float rot_z = 0.0f, float mass = 0.0f);*/

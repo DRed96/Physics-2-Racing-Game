@@ -4,9 +4,7 @@
 #include "ModuleCamera3D.h"
 #include "PhysVehicle3D.h"
 
-//TOCHANGE to .h
-#define CAMERA_DISTANCE 13
-#define CAMERA_HEIGHT 5
+
 ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	CalculateViewMatrix();
