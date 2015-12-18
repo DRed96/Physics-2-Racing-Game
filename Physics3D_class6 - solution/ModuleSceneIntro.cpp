@@ -17,15 +17,9 @@ bool ModuleSceneIntro::Start()
 	LOG("Loading Intro assets");
 	bool ret = true;
 
+	PhysBody3D* tmp = nullptr;
 	App->camera->Move(vec3(5.0f, 20.0f, 5.0f));
 	App->camera->LookAt(vec3(0.0f, 15.0f, 10.0f));
-
-	s.size = vec3(5, 3, 1);
-	s.SetPos(0, 2.5f, 20);
-
-	sensor = App->physics->AddBody(s, 0.0f);
-	sensor->SetAsSensor(true);
-	sensor->collision_listeners.add(this);
 
 	standardSize = { 9.0f, 1.0f, 7.0f };
 
@@ -42,35 +36,6 @@ bool ModuleSceneIntro::Start()
 	sizeTile.y = 0.5f;
 	sizeTile.z = 7.0f;
 	
-
-	PhysBody3D* tmp;
-	//TMP PLATFORM
-	CreatePlaneC(vec3{ -2.5f, 25.0f, 0.0f }, sizeTile, 1, 1, Red);
-			
-	
-			//Plane petit 1
-	/*CreatePlane(posPlane, sizeTile, 1, 1);
-	posPlane.x = 0.0f;
-	posPlane.y = 8.0f;
-	posPlane.z = 0.0f;
-	//Plane petit 2
-	CreatePlane(posPlane, sizeTile, 1, 1);*/
-	
-	
-	//Grid
-	/*CreatePlane(posPlane, sizeTile, 4, 4, angle, Rotation);
-	posPlane.x = 0.0f;
-	posPlane.y = 8.0f;
-	posPlane.z = 0.0f;*/
-	
-	//Plane petit 2
-	/*CreatePlane(posPlane, sizeTile,5,1);
-	
-	posPlane.x = 0.0f;
-	posPlane.y = 14.0f;
-	posPlane.z = 0.0f;*/
-
-
 
 	// Piramide ---------------
 	vec3 highPyramidPos = posPlane;
@@ -99,32 +64,28 @@ bool ModuleSceneIntro::Start()
 	CreatePlane(lowPyramidPos, sizeTile, 3, 3);
 
 	//Pyramid Roads ---------------
-		
-
 
 	//Road 1
 	vec3 proadVec1 = highPyramidPos;
+
 	proadVec1.x += sizeTile.x* 1.5f;
 	proadVec1.z -= sizeTile.z * 2.5f;
 	//7,20,15.75
 		CreatePlaneC({proadVec1.x , proadVec1.y, proadVec1.z}, sizeTile, 9,3,Red);
-	//Road 2
 
+	//Save Checkpoint coords
+	checkpoints[0] = proadVec1;
+
+	//Road 2
 	vec3 proadVec2 = lowPyramidPos;
 	proadVec2.x += (sizeTile.x/2 * 3);
 	proadVec2.z += (sizeTile.z * 0.3);
 	CreatePlaneC({ proadVec2.x , proadVec2.y, proadVec2.z }, sizeTile, 2, 30, Blue);
 
-	/*vec3 proadVec2 = lowPyramidPos;
-	proadVec2.x -= (sizeTile.x* 4.0f);
-	proadVec2.z += (sizeTile.z * 0.3);
-	CreatePlaneC({ proadVec2.x , proadVec2.y, proadVec2.z }, sizeTile, 2, 10, Blue);
-	*/
 	//Road 3
 	
 	vec3 proadVec3 = proadVec2;
 	proadVec3.x += (sizeTile.x/2 * 30);
-
 
 	CreatePlaneC(proadVec3, sizeTile, 7, 4, Blue);
 
@@ -132,7 +93,6 @@ bool ModuleSceneIntro::Start()
 	bumpPos.x += (sizeTile.y / 2 * 3);
 	bumpPos.y += (sizeTile.y);
 	bumpPos.z += (sizeTile.z / 2 * 3);
-	
 	
 	CreatePyramidNormal(bumpPos, { 3.0f, 0.75f, 3.0f }, 3);
 
@@ -173,6 +133,7 @@ bool ModuleSceneIntro::Start()
 	roadToWin.z -= 30.0f;
 	roadToWin.y -= 20.0f/2;
 	createPlatformC({ roadToWin.x, roadToWin.y, roadToWin.z }, { 35.0f, 1.0f, 70.0f }, tmp, 0.0f, 0.0f, 0.0f, 0.0f, false, -1, true, White);
+
 
 
 
@@ -220,6 +181,9 @@ bool ModuleSceneIntro::Start()
 
 
 
+	checkpoints[2] = roadToWin;
+
+
 	//Connects with the beggining
 	vec3 proadVec6 = proadVec1;
 	proadVec6.x += ((sizeTile.x / 2) * 3.03);
@@ -250,13 +214,12 @@ bool ModuleSceneIntro::Start()
 	createPlatformC({ pRamp1.x , pRamp1.y, pRamp1.z }, {6.0f,0.5f,15.0f}, tmp, 40.0f, 1.0f, 0.0f, 0.0f, false, -1, true, Blue);
 
 	//Base&Ramp2
-	//15,28.,1.75
 	pBase2.x += (sizeTile.x * 2);
 	pBase2.z -= (sizeTile.z/2 * 9);
 	pBase2.x -= 1.0f;
 	pBase2.y += 8.0f;
 	CreatePlaneC({ pBase2.x , pBase2.y, pBase2.z }, sizeTile, 8, 9, Red);
-	//9z,8y
+
 	vec3 pRamp2 = pBase2;
 	pRamp2.x += ((sizeTile.x)  * 3.65);
 	pRamp2.z += ((sizeTile.z / 2) *2 );
@@ -265,6 +228,10 @@ bool ModuleSceneIntro::Start()
 	createPlatformC({ pRamp2.x , pRamp2.y, pRamp2.z }, { 15.0f ,0.5f,6.0f }, tmp, -33.0f, 0.0f, 0.0f, 1.0f, false, -1, true, Blue);
 	//Base&Ramp3
 	vec3 pBase3 = mediumLowPyramidPos;
+
+	//Save Checkpoint coords
+	checkpoints[1] = pBase3;
+
 	pBase3.z += (sizeTile.z / 4) * 10;
 	CreatePlaneC({ pBase3.x , pBase3.y, pBase3.z }, sizeTile, 8, 5, Red);
 	
@@ -297,12 +264,6 @@ bool ModuleSceneIntro::Start()
 
 	//CreateCurve30(finalPos, sizeTile, 3, rotation);
 
-	//Plane que funciona
-	/*CreatePlane(posPlane, sizeTile, 4, 4);
-	posPlane.x = 0.0f;
-	posPlane.y = 14.0f;
-	posPlane.z = 0.0f;*/
-	
 
 	vec3 posPyramid1;
 	posPyramid1.x = -30.0f;
@@ -318,8 +279,7 @@ bool ModuleSceneIntro::Start()
 	int levels;
 	levels = 6;
 
-	//CreatePyramidNormal(posPyramid1, sizePyramid1, levels);
-	//CreateWeridSculpture(posPyramid1, sizePyramid1, levels);
+	
 
 
 
@@ -328,8 +288,6 @@ bool ModuleSceneIntro::Start()
 	posSlowGrid1.y = 15.0f;
 	posSlowGrid1.z = 15.0f;
 
-
-	//CreateSlowGrid(posSlowGrid1, sizeTile, 4, 4, angle, Rotation);
 
 	//Create Lap Counters
 	laps = antiCheat = 0;
@@ -342,8 +300,29 @@ bool ModuleSceneIntro::Start()
 
 	vec3 SizeTile;
 
-//	CreatePlane(MainRoad, );
+	//Checkpoints
+	vec3 current = checkpoints[0];
+	
+	
+	current.x += 11.0f;
+	current.y += (2.05f);
+	current.z = ((SizeTile.x / 2) * 2);
 
+	vec3 standardCheckSize = { 15.0f, 0.5f, 9.0f };
+
+	CreateSensor(current, standardCheckSize, tmp, 0, false);
+
+	current = checkpoints[1];
+	current.x += 11.0f;
+	current.y += (2.55f);
+	current.z += (37.55f);
+	CreateSensor(current, standardCheckSize, tmp, 1, false);
+
+	current = checkpoints[2];
+
+	current.y += (2.55f);
+	standardCheckSize.x *= 4;
+	CreateSensor(current, standardCheckSize, tmp, 2, false);
 
 	return ret;
 }
@@ -593,10 +572,6 @@ update_status ModuleSceneIntro::Update(float dt)
 	Plane p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
-
-	sensor->GetTransform(&s.transform);
-	s.Render();
-	
 	//forReal->SetTransform(&platform1.transform);
 	p2List_item<Cube*> * tmp = platforms.getFirst();
 	while (tmp)
@@ -671,9 +646,8 @@ Cube * ModuleSceneIntro::createPlatformC(vec3 position, vec3 size, PhysBody3D *&
 	return obj;
 }
 
-Cube * ModuleSceneIntro::createSensor(vec3 position, vec3 size, PhysBody3D *& pBody, int check, bool isVisible, float rot, float rot_x, float rot_y, float rot_z, float mass)
+Cube * ModuleSceneIntro::CreateSensor(vec3 position, vec3 size, PhysBody3D *& pBody, int check, bool isVisible, float rot, float rot_x, float rot_y, float rot_z, float mass)
 {
-	
 	return createPlatform(position, size, pBody, rot, rot_x, rot_y, rot_z, true, check, isVisible, mass);
 }
 
@@ -767,10 +741,6 @@ int ModuleSceneIntro::Checkpoint(int current)
 				antiCheat = current;
 			break;
 		case 2:
-			if (current == 3)
-				antiCheat = current;
-			break;
-		case 3:
 			if (current == 0)
 			{
 				antiCheat = current;
@@ -784,12 +754,7 @@ int ModuleSceneIntro::Checkpoint(int current)
 
 void ModuleSceneIntro::declareChecks()
 {
-	PhysBody3D* tmp;
-	createSensor({ 0.0f, 3.0f, 20.0f }, standardSize,tmp, 0,true);
-	createSensor({ 0.0f, 3.0f, 35.0f }, standardSize, tmp, 1, true);
-	createSensor({ 0.0f, 3.0f, 45.0f }, standardSize, tmp, 2, true);
-	createSensor({ 0.0f, 3.0f, 60.0f }, standardSize, tmp, 3, true);
-
+	
 	return;
 }
 
