@@ -119,6 +119,7 @@ bool ModuleSceneIntro::Start()
 	proadVec2.x -= (sizeTile.x* 4.0f);
 	proadVec2.z += (sizeTile.z * 0.3);
 	CreatePlaneC({ proadVec2.x , proadVec2.y, proadVec2.z }, sizeTile, 2, 10, Blue);
+
 	//Pyramid Ramps ---------------
 	
 	vec3 rotation = {0.0f, 1.0f, 0.0f};
