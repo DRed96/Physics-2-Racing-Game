@@ -101,7 +101,7 @@ bool ModulePlayer::Start()
 	//vehicle->SetPos(0, 23, 10);
 	isMoving = false;
 	
-	vehicle->SetPos(0, 0, 7);
+	vehicle->SetPos(0, 20.0f, 7.0f);
 
 	
 	return true;

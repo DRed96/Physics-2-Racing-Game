@@ -147,7 +147,7 @@ bool ModuleSceneIntro::Start()
 	posPlane.x = 0.0f;
 	posPlane.y = 14.0f;
 	posPlane.z = 0.0f;
-	CreatePlane(posPlane, sizeTile, 6, 6, angle, Rotation);
+	vec3 finalPos = CreatePlane(posPlane, sizeTile, 6, 6, angle, Rotation);
 	posPlane.x += sizeTile.x/4;
 	posPlane.y = 17.0f;
 	posPlane.z += sizeTile.z/4;
@@ -165,7 +165,9 @@ bool ModuleSceneIntro::Start()
 	posPlane.z += sizeTile.z / 4;
 	CreatePlane(posPlane, sizeTile, 2, 2);
 
+	vec3 rotation = {0.0f, 1.0f, 0.0f};
 
+	CreateCurve30(finalPos, sizeTile, 3, rotation);
 
 	return ret;
 }
@@ -176,48 +178,72 @@ void ModuleSceneIntro::CreateCurve45(vec3 pos, vec3 sizeTile, int rows, float an
 
 }
 
-void ModuleSceneIntro::CreateCurve30(vec3 pos, vec3 sizeTile, int rows, float angle)
+void ModuleSceneIntro::CreateCurve30(vec3 pos, vec3 sizeTile, int rows, vec3 rot)
 {
-	float rot = angle / 3;
+	float arc = 30.0f / 3;
 
-	
-	CreatePlane(pos, sizeTile, rows, 1);
+	vec3 orientation = CreatePlane(pos, sizeTile, 1, rows, arc, rot);
+	orientation = CreatePlane(orientation, sizeTile, 1, rows, arc*2, rot);
+	orientation = CreatePlane(orientation, sizeTile, 1, rows, arc*3, rot);
 
 }
 
 
 
-void ModuleSceneIntro::CreatePlane(vec3 positionPlane, vec3 sizeTile, int rows, int cols, float angle, vec3 rot)
+vec3 ModuleSceneIntro::CreatePlane(vec3 positionPlane, vec3 sizeTile, int rows, int cols, float angle, vec3 rot)
 {
 	vec3 vec = positionPlane;
 	vec.y = 0.0f;
 	float nextRow = sizeTile.x;
 	float nextCol = sizeTile.z;
+	int i, j;
 
 	vec3 posTile = positionPlane;
 
-	for (int i = 0; i < rows; i++)
+	for (i = 0; i < rows; i++)
 	{
 	
-		for (int j = 0; j < cols; j++)
+		for (j = 0; j < cols; j++)
 		{
 			PhysBody3D* pbody;
 			
 
 			Cube* cube = createPlatform((positionPlane + vec ), sizeTile, pbody, angle, rot.x, rot.y, rot.z);
-
-			vec.x += nextRow;
+			if (angle != 0)
+			{
+				vec.z += nextCol/2;
+				vec.x += nextRow/2;
+			}
+			else
+			{
+				vec.x += nextRow;
+			}
 				
 		}
 
-		vec.z += nextCol;
-		vec.x = positionPlane.x;
+		if (angle != 0)
+		{
+			vec.z = positionPlane.z;
+			vec.z += (nextCol * i)/2;
+			vec.x =  -(nextRow * i)/2;
+		}
+		else
+		{
+			vec.z += nextCol;
+			vec.x = positionPlane.x;
+
+		}
+		
+	
 	}
 
+	if (angle != 0)
+	{
+		vec.x -= nextCol/2 * j;
+		vec.z -= nextRow/2 * j;
+	}
 
-
-
-
+	return (positionPlane+vec);
 
 
 }
@@ -259,15 +285,16 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 
 //Platform Factory
 
-Cube* ModuleSceneIntro::createPlatform(vec3 pos, vec3 _size, PhysBody3D*& pbody,  bool isSensor, int check, bool isVisible, float rot_angle, float rot_x, float rot_y, float rot_z, float mass)
+Cube* ModuleSceneIntro::createPlatform(vec3 position, vec3 size, PhysBody3D*& pBody, float rot, float rot_x,
+	float rot_y, float rot_z, bool isSensor, int check, bool isVisible, float mass)
 {
 	Cube* obj = new Cube();
 
-	obj->SetPos(pos.x, pos.y, pos.z);
-	obj->size = _size;
-	obj->SetRotation(rot_angle, vec3{ rot_x, rot_y, rot_z });
+	obj->SetPos(position.x, position.y, position.z);
+	obj->size = size;
+	obj->SetRotation(rot, vec3{ rot_x, rot_y, rot_z });
 
-	pbody = App->physics->AddBody(*obj, mass);
+	pBody = App->physics->AddBody(*obj, mass);
 
 	/*If we don't add the obj to the List we'll only use it's coords 
 	* without saving it in the heap and it won't be rendered. */
@@ -275,9 +302,9 @@ Cube* ModuleSceneIntro::createPlatform(vec3 pos, vec3 _size, PhysBody3D*& pbody,
 		platforms.add(obj);
 	if (isSensor)
 	{
-		pbody->SetAsSensor(true);
-		pbody->collision_listeners.add(this);
-		pbody->check_point_num = check;
+		pBody->SetAsSensor(true);
+		pBody->collision_listeners.add(this);
+		pBody->check_point_num = check;
 	}
 	return obj;
 }
