@@ -23,8 +23,6 @@ bool ModuleSceneIntro::Start()
 
 	standardSize = { 9.0f, 1.0f, 7.0f };
 
-	//Heavy Loading function
-	circuitConstruction();
 
 	vec3 posPlane(0);
 	posPlane.x = 0.0f;
@@ -138,13 +136,13 @@ bool ModuleSceneIntro::Start()
 
 	//Connects with the beggining
 	vec3 proadVec6 = proadVec1;
-	proadVec6.x += ((sizeTile.x / 2) * 3.03);
+	proadVec6.x += ((sizeTile.x / 2) * 3.0f);
 	CreatePlaneC(proadVec6, sizeTile, 3, 16, Blue);
 	
 	//Road3
 	vec3 proadVec7 = proadVec6;
-	proadVec7.x += ((sizeTile.x / 2) * 10.03);
-	proadVec7.z += ((sizeTile.z / 2) * 2.0);
+	proadVec7.x += ((sizeTile.x / 2) * 10.0f);
+	proadVec7.z += ((sizeTile.z / 2) * 2.0f);
 	CreatePlaneC(proadVec7, sizeTile, 12, 6, White);
 	
 	//Pyramid Ramps ---------------
@@ -196,13 +194,12 @@ bool ModuleSceneIntro::Start()
 
 
 
-	//Otter Stuff----------
+	//Other Stuff----------
 	vec3 rotation = {0.0f, 1.0f, 0.0f};
 	//Ramp
 	vec3 sizeTileRamp = sizeTile;
 	vec3 posRamp = mediumLowPyramidPos;
 	posRamp.x += sizeTile.x/2;
-	//posRamp.y += sizeTile.y;
 	posRamp.z -= sizeTile.x/2;
 
 	sizeTileRamp.z = 20;
@@ -243,7 +240,6 @@ bool ModuleSceneIntro::Start()
 
 	//Create Lap Counters
 	laps = antiCheat = 0;
-	declareChecks();
 
 	vec3 MainRoad;
 	MainRoad.x = 10.0f;
@@ -505,11 +501,6 @@ vec3 ModuleSceneIntro::CreateSlowGrid(vec3 positionPlane, vec3 sizeTile, int row
 
 
 
-
-
-
-
-
 // Load assets
 bool ModuleSceneIntro::CleanUp()
 {
@@ -613,10 +604,7 @@ bool ModuleSceneIntro::AttachPlatform(PhysBody3D* obj, PhysBody3D* obj2, Cube* c
 
 	vec3 posObj2 = obj2->GetPos();
 	vec3 sizeObj2 = obj2->GetSize();
-	/*
-	vec3 posObj = obj->GetPos();
-	vec3 sizeObj = obj->GetSize();
-	*/
+	
 
 	vec3 posObj;
 	posObj.x = transformObj1[12];
@@ -704,90 +692,4 @@ int ModuleSceneIntro::Checkpoint(int current)
 	return antiCheat;
 }
 
-void ModuleSceneIntro::declareChecks()
-{
-	
-	return;
-}
-
-
-void ModuleSceneIntro::circuitConstruction()
-{
-
-	/*cubes[0] = createPlatform({ 0.0f, 16.0f, 7.5f }, { 9.0f, 1.0f, 7.0f }, pbodys[0]);
-	cubes[1] = createPlatform({ 0.0f, 13.0f, 16.0f }, { 9.0f, 1.0f, 7.0f }, pbodys[1]);
-	cubes[2] = createPlatform({ 0.0f, 13.0f, 23.0f }, { 9.0f, 1.0f, 7.0f }, pbodys[2]);
-	cubes[3] = createPlatform({ 0.0f, 13.0f, 30.0f }, { 9.0f, 1.0f, 7.0f }, pbodys[3]);
-	cubes[4] = createPlatform({ 0.0f, 13.0f, 37.0f }, { 9.0f, 1.0f, 7.0f }, pbodys[4]);
-	cubes[5] = createPlatform({ 0.0f, 13.0f, 44.0f }, { 9.0f, 1.0f, 7.0f }, pbodys[5]);
-	cubes[6] = createPlatform({ 0.0f, 13.0f, 51.0f }, { 9.0f, 1.0f, 7.0f }, pbodys[6]);
-	cubes[7] = createPlatform({ 0.0f, 13.0f, 58.0f }, { 9.0f, 1.0f, 7.0f }, pbodys[7]);
-	cubes[8] = createPlatform({ 0.0f, 13.0f, 65.0f }, { 6.0f, 1.0f, 7.0f }, pbodys[8]);
-	cubes[9] = createPlatform({ 0.0f, 13.0f, 72.0f }, { 6.0f, 1.0f, 7.0f }, pbodys[9]);
-	cubes[10] = createPlatform({ 0.0f, 13.0f, 79.0f }, { 6.0f, 1.0f, 7.0f }, pbodys[10]);
-	cubes[11] = createPlatform({ 0.0f, 13.0f, 86.0f }, { 6.0f, 1.0f, 7.0f }, pbodys[11]);
-	cubes[12] = createPlatform({ 0.0f, 13.0f, 93.0f }, { 6.0f, 1.0f, 7.0f }, pbodys[12]);
-	cubes[13] = createPlatform({ 0.0f, 13.0f, 100.0f }, { 6.0f, 1.0f, 7.0f }, pbodys[13]);
-	cubes[14] = createPlatform({ 0.0f, 13.0f, 107.0f }, { 6.0f, 1.0f, 7.0f }, pbodys[14]);
-
-
-
-	AttachPlatform(pbodys[0], pbodys[1], cubes[0], cubes[1], RIGHT);
-	AttachPlatform(pbodys[0], pbodys[2], cubes[0], cubes[2], RIGHT);
-	AttachPlatform(pbodys[0], pbodys[3], cubes[0], cubes[3], RIGHT);
-	AttachPlatform(pbodys[0], pbodys[4], cubes[0], cubes[4], RIGHT);
-	AttachPlatform(pbodys[0], pbodys[5], cubes[0], cubes[5], RIGHT);
-	AttachPlatform(pbodys[0], pbodys[6], cubes[0], cubes[6], RIGHT);
-	AttachPlatform(pbodys[0], pbodys[7], cubes[6], cubes[7], RIGHT);
-	AttachPlatform(pbodys[0], pbodys[8], cubes[7], cubes[8], RIGHT);
-	AttachPlatform(pbodys[0], pbodys[9], cubes[8], cubes[9], RIGHT);
-	AttachPlatform(pbodys[0], pbodys[10], cubes[9], cubes[10], RIGHT);
-	AttachPlatform(pbodys[0], pbodys[11], cubes[10], cubes[11], RIGHT);
-
-	*/
-}
-/*
-cube0 = createPlatform({ 0.0f, 16.0f, 7.5f }, { 9.0f, 1.0f, 7.0f },  pbody0);
-cube1 = createPlatform({ 0.0f, 13.0f, 16.0f }, { 9.0f, 1.0f, 7.0f }, pbody1);
-
-cube2 = createPlatform({ 0.0f, 13.0f, 23.0f }, { 9.0f, 1.0f, 7.0f }, pbody2);
-
-cube3 = createPlatform({ 0.0f, 13.0f, 30.0f }, { 9.0f, 1.0f, 7.0f }, pbody3);
-
-cube4 = createPlatform({ 0.0f, 13.0f, 37.0f }, { 9.0f, 1.0f, 7.0f }, pbody4);
-
-cube5 = createPlatform({ 0.0f, 13.0f, 44.0f }, { 9.0f, 1.0f, 7.0f }, pbody5);
-
-cube6 = createPlatform({ 0.0f, 13.0f, 51.0f }, { 9.0f, 1.0f, 7.0f }, pbody6);
-
-cube7 = createPlatform({ 0.0f, 13.0f, 58.0f }, { 9.0f, 1.0f, 7.0f }, pbody7);
-
-cube8 = createPlatform({ 0.0f, 13.0f, 65.0f }, { 6.0f, 1.0f, 7.0f }, pbody8);
-
-cube9 = createPlatform({ 0.0f, 13.0f, 72.0f }, { 6.0f, 1.0f, 7.0f }, pbody9);
-
-cube10 = createPlatform({ 0.0f, 13.0f, 79.0f }, { 6.0f, 1.0f, 7.0f }, pbody10);
-
-cube11 = createPlatform({ 0.0f, 13.0f, 86.0f }, { 6.0f, 1.0f, 7.0f }, pbody11);
-
-cube12 = createPlatform({ 0.0f, 13.0f, 93.0f }, { 6.0f, 1.0f, 7.0f }, pbody12);
-
-cube13 = createPlatform({ 0.0f, 13.0f, 100.0f }, { 6.0f, 1.0f, 7.0f },pbody13);
-
-cube14 = createPlatform({ 0.0f, 13.0f, 107.0f }, { 6.0f, 1.0f, 7.0f },pbody14);
-
-
-
-AttachPlatform(pbody0, pbody1, cube0, cube1, RIGHT);
-AttachPlatform(pbody0, pbody2, cube0, cube2, LEFT);
-AttachPlatform(pbody0, pbody3, cube0, cube3, BACK);
-AttachPlatform(pbody0, pbody4, cube0, cube4, FRONT);
-AttachPlatform(pbody0, pbody5, cube0, cube5, BELOW);
-AttachPlatform(pbody0, pbody6, cube0, cube6, TOP);
-AttachPlatform(pbody6, pbody7, cube6, cube7, TOP);
-AttachPlatform(pbody7, pbody8, cube7, cube8, TOP);
-AttachPlatform(pbody8, pbody9, cube8, cube9, TOP);
-AttachPlatform(pbody9, pbody10, cube9, cube10, TOP);
-AttachPlatform(pbody10, pbody11, cube10, cube11, TOP);
-*/
 

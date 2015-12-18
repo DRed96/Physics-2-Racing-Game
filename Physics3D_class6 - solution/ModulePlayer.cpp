@@ -100,14 +100,9 @@ bool ModulePlayer::Start()
 	
 
 	timer = new Timer();
-	isStarting = true;
 
 	finish = false;
 	victory = false;
-	//7,20,15.75
-	//-5.0f, 26.0f, 0.0f
-	//3,36,22
-	//7,20,15.75
 	vehicle->SetPos(15.0f, 26.0f, -25.0f);
 
 
@@ -134,13 +129,11 @@ update_status ModulePlayer::PreUpdate(float dt)
 	{
 		if (victory)
 		{
-			//ret = UPDATE_STOP;
+			ret = UPDATE_STOP;
 		}
 		else
 		{
-			/*
-			*Derrota
-			*/
+			ret = UPDATE_STOP;
 		}
 	}
 	return ret;
@@ -149,15 +142,6 @@ update_status ModulePlayer::PreUpdate(float dt)
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
-	if (isStarting)
-	{
-		//TOCHANGE: 
-		//if (timer->Read() > 3000)
-			isStarting = false;
-			timer->Start();
-	}
-	else
-	{
 		turn = acceleration = brake = 0.0f;
 
 		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
@@ -197,7 +181,6 @@ update_status ModulePlayer::Update(float dt)
 			brake = BRAKE_POWER;
 			vehicle->Brake(brake);
 			vehicle->SetPos(18.0f, 30.0f, -25.0f);
-
 			vehicle->Brake(0.0);
 		}
 		char title[80];
@@ -208,7 +191,6 @@ update_status ModulePlayer::Update(float dt)
 	
 		sprintf_s(title, "%.1f Km/h Laps: %d Current Time: %.2f Time Limit %d", vehicle->GetKmh(), App->scene_intro->laps, seconds, (MAX_TIME/1000));
 		App->window->SetTitle(title);
-	}
 	return UPDATE_CONTINUE;
 }
 

@@ -55,10 +55,6 @@ public:
 	//bool AttachPlatform(PhysBody3D& obj, PhysBody3D& obj2, Cube& cObj1, Cube& cObj2, Orientation orientation);
 
 	//Checkpoint creation
-	void declareChecks();
-
-	//Checkpoint creation
-	void circuitConstruction();
 	//---------------------------
 	vec3 CreateSlowGrid(vec3 positionPlane, vec3 sizeTile, int rows, int cols, float angle = 0.0f, vec3 rotation = { 0.0f, 0.0f, 0.0f});
 
