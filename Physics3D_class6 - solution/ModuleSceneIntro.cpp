@@ -131,6 +131,16 @@ bool ModuleSceneIntro::Start()
 	//CreateSlowGrid(posSlowGrid1, sizeTile, 4, 4, angle, Rotation);
 
 
+	vec3 MainRoad;
+	MainRoad.x = 10.0f;
+	MainRoad.y = 0.0f;
+	MainRoad.z = 10.0f;
+
+	vec3 SizeTile;
+
+	CreatePlane(MainRoad, );
+
+
 	return ret;
 }
 
