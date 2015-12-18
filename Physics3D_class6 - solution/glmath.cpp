@@ -615,14 +615,12 @@ mat4x4& mat4x4::rotate(float angle, const vec3 &u)
 	
 	const vec3 rot = { 0.0f, 0.0f, 0.0f };
 	vec3 v = rot;
-	if (u.x == 0.0f && u.y == 0.0f && u.z == 0.0f)
-	{
-		
-	}
-	else
+
+	if (u.x != 0.0f || u.y != 0.0f || u.z != 0.0f)
 	{
 		v = normalize(u);
 	}
+
 	float c = 1.0f - cos(angle), s = sin(angle);
 
 	M[0] = 1.0f + c * (v.x * v.x - 1.0f);
