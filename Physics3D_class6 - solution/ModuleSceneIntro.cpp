@@ -556,6 +556,15 @@ bool ModuleSceneIntro::CleanUp()
 
 
 
+
+
+	p2List_item<Cube*>* tmp = platforms.getFirst();
+	while (tmp)
+	{
+		delete(tmp->data);
+		tmp = tmp->next;
+	}
+	platforms.clear();
 	return true;
 }
 
@@ -647,7 +656,6 @@ Cube * ModuleSceneIntro::CreateSensor(vec3 position, vec3 size, PhysBody3D *& pB
 bool ModuleSceneIntro::AttachPlatform(PhysBody3D* obj, PhysBody3D* obj2, Cube* cObj1, Cube* cObj2, Orientation orientation)
 {
 	bool ret = false;
-	float* obj1Transform;
 	float* transformObj1 = cObj1->transform.M;
 	float* transformObj2 = cObj2->transform.M;
 
