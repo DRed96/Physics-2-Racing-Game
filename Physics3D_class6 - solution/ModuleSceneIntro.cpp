@@ -132,7 +132,55 @@ bool ModuleSceneIntro::Start()
 	roadToWin.y -= 20.0f/2;
 	createPlatformC({ roadToWin.x, roadToWin.y, roadToWin.z }, { 35.0f, 1.0f, 70.0f }, tmp, 0.0f, 0.0f, 0.0f, 0.0f, false, -1, true, White);
 
+
+
+
+
+	vec3 bump1Pos = roadToWin;
+	bump1Pos.x -= 47.0f;
+	bump1Pos.y += 1.0f;
+	bump1Pos.z -= 20.0f;
+
+
+	CreatePyramidNormal(bump1Pos, { 3.0f, 0.75f, 3.0f }, 3);
+
+
+	vec3 bump2Pos = roadToWin;
+	bump2Pos.x -= 50.0f;
+	bump2Pos.y += 1.0f;
+	bump2Pos.z -= 25.0f;
+
+
+	CreatePyramidNormal(bump2Pos, { 3.0f, 0.75f, 3.0f }, 3);
+
+
+	vec3 bump3Pos = roadToWin;
+	bump3Pos.x -= 40.0f;
+	bump3Pos.y += 1.0f;
+	bump3Pos.z -= 30.0f;
+
+
+	CreatePyramidNormal(bump3Pos, { 3.0f, 0.75f, 3.0f }, 3);
+
+
+	vec3 bump4Pos = roadToWin;
+	bump4Pos.x -= 49.0f;
+	bump4Pos.y += 1.0f;
+	bump4Pos.z -= 40.0f;
+
+
+	CreatePyramidNormal(bump4Pos, { 3.0f, 0.75f, 3.0f }, 3);
+
+
+
+
+
+
+
+
+
 	checkpoints[2] = roadToWin;
+
 
 	//Connects with the beggining
 	vec3 proadVec6 = proadVec1;
