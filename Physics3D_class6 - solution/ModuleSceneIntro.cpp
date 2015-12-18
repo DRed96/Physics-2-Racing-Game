@@ -135,7 +135,7 @@ bool ModuleSceneIntro::Start()
 	bumpPos.z += (sizeTile.z / 2 * 3);
 	
 	
-	CreatePyramidNormal(bumpPos, { 0.3f, 0.2f, 0.7f }, 3);
+	CreatePyramidNormal(bumpPos, { 3.0f, 0.75f, 3.0f }, 3);
 
 	vec3 proadVec4 = proadVec3;
 	proadVec4.z += (sizeTile.z / 2 * 2);
@@ -143,10 +143,8 @@ bool ModuleSceneIntro::Start()
 
 
 
-	CreatePlaneC(proadVec4, sizeTile, 10, 3, Blue);
-	//proadVec4.x = ;
-	//proadVec4.y = ;
-	//proadVec4.z = ;
+	//CreatePlaneC(proadVec4, sizeTile, 20, 3, Blue);
+
 
 	
 
@@ -154,7 +152,33 @@ bool ModuleSceneIntro::Start()
 	proadVec5.x += (sizeTile.x / 2 * 3);
 
 
-	CreatePlaneC(proadVec5, sizeTile, 5, 3, Blue);
+	CreatePlaneC(proadVec5, sizeTile, 20, 3, Blue);
+
+
+	vec3 pRamp4 = proadVec4;
+	pRamp4.x += (57.0f);
+	pRamp4.z += (69.0f + 10.0f);
+	//pRamp4.z += 1.75;
+	pRamp4.y -= 10.0f;
+	createPlatformC({ pRamp4.x, pRamp4.y, pRamp4.z }, { 50.0f, 0.5f, 15.0f }, tmp, 23.0f, 0.0f, 0.0f, 1.0f, false, -1, true, Blue);
+
+
+	vec3 wall1 = proadVec5;
+	wall1.x += (80.0f);
+	wall1.z += (85.0f);
+	//pRamp4.z += 1.75;
+	wall1.y += 2.0f;
+	createPlatformC({ wall1.x, wall1.y, wall1.z }, { 10.0f, 3.0f, 1.0f }, tmp, 0.0f, 0.0f, 0.0f, 0.0f, false, -1, true, Blue);
+
+
+
+
+	vec3 roadToWin = pRamp4;
+	roadToWin.x -= (39.0f);
+	//roadToWin.z += (85.0f);
+	roadToWin.z -= 30.0f;
+	roadToWin.y -= 20.0f/2;
+	createPlatformC({ roadToWin.x, roadToWin.y, roadToWin.z }, { 35.0f, 1.0f, 70.0f }, tmp, 0.0f, 0.0f, 0.0f, 0.0f, false, -1, true, Blue);
 
 
 
@@ -240,8 +264,11 @@ bool ModuleSceneIntro::Start()
 	int levels;
 	levels = 6;
 
-	CreatePyramidNormal(posPyramid1, sizePyramid1, levels);
+	//CreatePyramidNormal(posPyramid1, sizePyramid1, levels);
 	//CreateWeridSculpture(posPyramid1, sizePyramid1, levels);
+
+
+
 
 
 	vec3 posSlowGrid1;
