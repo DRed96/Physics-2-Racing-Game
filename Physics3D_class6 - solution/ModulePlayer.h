@@ -9,7 +9,7 @@ class Timer;
 #define TURN_DEGREES 15.0f * DEGTORAD
 #define BRAKE_POWER 1000.0f
 //Victory Condtions
-#define MAX_LAPS 4
+#define MAX_LAPS 2
 #define MAX_TIME 720000
 class ModulePlayer : public Module
 {
