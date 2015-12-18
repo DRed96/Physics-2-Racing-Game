@@ -49,7 +49,8 @@ bool ModuleSceneIntro::Start()
 	Rotation.y = 1.0f;
 	Rotation.z = 0.0f;
 
-	
+	//TMP PLATFORM
+	CreatePlane(vec3{ -2.5f, 25.0f, 0.0f }, sizeTile, 1, 1);
 	//Plane petit 1
 	/*CreatePlane(posPlane, sizeTile, 1, 1);
 	posPlane.x = 0.0f;
@@ -72,8 +73,11 @@ bool ModuleSceneIntro::Start()
 	posPlane.y = 14.0f;
 	posPlane.z = 0.0f;*/
 	
-	//Piramide
+	//Grid
 	//vec3 finalPos = CreatePlane(posPlane, sizeTile, 6, 6, angle, Rotation);
+
+vec3 proadVec1 = posPlane;
+
 	// Piramide ---------------
 	vec3 highPyramidPos = posPlane;
 
@@ -101,8 +105,12 @@ bool ModuleSceneIntro::Start()
 
 	CreatePlane(lowPyramidPos, sizeTile, 3, 3);
 	//  ---------------
-	laps = antiCheat = 0;
-	declareChecks();
+
+	//Pyramid Roads ---------------
+	CreatePlane({ proadVec1.x, proadVec1.y, proadVec1.z - (proadVec1.z *20) }, sizeTile, 5,2);
+	//  ---------------
+	
+	
 	vec3 rotation = {0.0f, 1.0f, 0.0f};
 
 
@@ -138,6 +146,7 @@ bool ModuleSceneIntro::Start()
 	//Pyramids
 	int levels;
 	levels = 6;
+
 	CreatePyramidNormal(posPyramid1, sizePyramid1, levels);
 	//CreateWeridSculpture(posPyramid1, sizePyramid1, levels);
 
@@ -150,6 +159,9 @@ bool ModuleSceneIntro::Start()
 
 	//CreateSlowGrid(posSlowGrid1, sizeTile, 4, 4, angle, Rotation);
 
+	//Create Lap Counters
+	laps = antiCheat = 0;
+	declareChecks();
 
 	vec3 MainRoad;
 	MainRoad.x = 10.0f;
