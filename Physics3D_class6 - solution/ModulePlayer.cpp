@@ -106,10 +106,8 @@ bool ModulePlayer::Start()
 	victory = false;
 	//7,20,15.75
 	//-5.0f, 26.0f, 0.0f
-
-	vehicle->SetPos(17.0f, 44.0f, 20.1f);
-	
-
+	//3,36,22
+	vehicle->SetPos(5.0f, 37.0f, 19.0f);
 
 
 	return true;

@@ -184,7 +184,6 @@ bool ModuleSceneIntro::Start()
 
 	//Base&Ramp2
 	//15,28.,1.75
-	
 	pBase2.x += (sizeTile.x * 2);
 	pBase2.z -= (sizeTile.z/2 * 9);
 	pBase2.x -= 1.0f;
@@ -198,6 +197,18 @@ bool ModuleSceneIntro::Start()
 	pRamp2.y += 4.0f;
 	createPlatformC({ pRamp2.x , pRamp2.y, pRamp2.z }, { 15.0f ,0.5f,6.0f }, tmp, -33.0f, 0.0f, 0.0f, 1.0f, false, -1, true, Blue);
 	//Base&Ramp3
+	vec3 pBase3 = mediumLowPyramidPos;
+	pBase3.z += (sizeTile.z / 4) * 10;
+	CreatePlaneC({ pBase3.x , pBase3.y, pBase3.z }, sizeTile, 8, 5, Red);
+	
+	vec3 pRamp3 = pBase3;
+	pRamp3.y += 4.0f;
+	pRamp3.z += ((sizeTile.z / 2) * 4);
+	pRamp3.z -= 1;
+	pRamp3.x += 6.5f;
+	createPlatformC({ pRamp3.x , pRamp3.y, pRamp3.z }, { 4.0f ,0.5f,12.0f }, tmp, 43.0f, 1.0f, 0.0f, 0.0f, false, -1, true, Blue);
+
+
 
 	//Otter Stuff----------
 	vec3 rotation = {0.0f, 1.0f, 0.0f};
