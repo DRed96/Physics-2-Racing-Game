@@ -50,7 +50,7 @@ bool ModuleSceneIntro::Start()
 	Rotation.z = 0.0f;
 
 	//TMP PLATFORM
-	CreatePlane(vec3{ -2.5f, 25.0f, 0.0f }, sizeTile, 1, 1);
+	CreatePlaneC(vec3{ -2.5f, 25.0f, 0.0f }, sizeTile, 1, 1, Red);
 	//Plane petit 1
 	/*CreatePlane(posPlane, sizeTile, 1, 1);
 	posPlane.x = 0.0f;
@@ -76,7 +76,7 @@ bool ModuleSceneIntro::Start()
 	//Grid
 	//vec3 finalPos = CreatePlane(posPlane, sizeTile, 6, 6, angle, Rotation);
 
-vec3 proadVec1 = posPlane;
+
 
 	// Piramide ---------------
 	vec3 highPyramidPos = posPlane;
@@ -102,14 +102,21 @@ vec3 proadVec1 = posPlane;
 	lowPyramidPos.x += sizeTile.x / 4;
 	lowPyramidPos.y += 8.0f;
 	lowPyramidPos.z += sizeTile.z / 4;
-
 	CreatePlane(lowPyramidPos, sizeTile, 3, 3);
-	//  ---------------
 
 	//Pyramid Roads ---------------
-	CreatePlane({ proadVec1.x, proadVec1.y, proadVec1.z - (proadVec1.z *20) }, sizeTile, 5,2);
-	//  ---------------
-	
+		//Road 1
+	vec3 proadVec1 = highPyramidPos;
+	proadVec1.x += sizeTile.x* 1.5f;
+	proadVec1.z -= sizeTile.z * 2.5f;
+	//7,20,15.75
+	CreatePlaneC({proadVec1.x , proadVec1.y, proadVec1.z}, sizeTile, 10,3,Red);
+	//Road 2
+	vec3 proadVec2 = lowPyramidPos;
+	proadVec2.x -= (sizeTile.x* 4.0f);
+	proadVec2.z += (sizeTile.z * 0.3);
+	CreatePlaneC({ proadVec2.x , proadVec2.y, proadVec2.z }, sizeTile, 2, 10, Blue);
+	//Pyramid Ramps ---------------
 	
 	vec3 rotation = {0.0f, 1.0f, 0.0f};
 
@@ -291,6 +298,59 @@ vec3 ModuleSceneIntro::CreatePlane(vec3 positionPlane, vec3 sizeTile, int rows, 
 
 }
 
+vec3 ModuleSceneIntro::CreatePlaneC(vec3 positionPlane, vec3 sizeTile, int rows, int cols, Color _color, float angle, vec3 rot )
+{
+	vec3 vec = positionPlane;
+	vec.y = 0.0f;
+	float nextRow = sizeTile.x;
+	float nextCol = sizeTile.z;
+	int i, j;
+
+	vec3 posTile = positionPlane;
+
+	for (i = 0; i < rows; i++)
+	{
+
+		for (j = 0; j < cols; j++)
+		{
+			PhysBody3D* pbody;
+
+
+			Cube* cube = createPlatformC((positionPlane + vec), sizeTile, pbody, angle, rot.x, rot.y, rot.z,false,-1,true, _color);
+			if (angle != 0)
+			{
+				vec.x += nextRow / 2;
+			}
+			else
+			{
+				vec.x += nextRow;
+			}
+
+		}
+
+		if (angle != 0)
+		{
+			vec.z += nextCol / 2;
+			vec.x = positionPlane.x;
+		}
+		else
+		{
+			vec.z += nextCol / 2;
+			vec.x = positionPlane.x;
+		}
+
+
+	}
+
+	if (angle != 0)
+	{
+		vec.x -= nextCol / 2 * j;
+		vec.z -= nextRow / 2 * j;
+	}
+
+	return (positionPlane + vec);
+}
+
 
 vec3 ModuleSceneIntro::CreateSlowGrid(vec3 positionPlane, vec3 sizeTile, int rows, int cols, float angle, vec3 rot)
 {
@@ -413,6 +473,29 @@ Cube* ModuleSceneIntro::createPlatform(vec3 position, vec3 size, PhysBody3D*& pB
 	/*If we don't add the obj to the List we'll only use it's coords 
 	* without saving it in the heap and it won't be rendered. */
 	if(isVisible)
+		platforms.add(obj);
+	if (isSensor)
+	{
+		pBody->SetAsSensor(true);
+		pBody->collision_listeners.add(this);
+		pBody->check_point_num = check;
+	}
+	return obj;
+}
+
+Cube * ModuleSceneIntro::createPlatformC(vec3 position, vec3 size, PhysBody3D *& pBody, float rot, float rot_x, float rot_y, float rot_z, bool isSensor, int check, bool isVisible, Color _col, float mass)
+{
+	Cube* obj = new Cube();
+
+	obj->SetPos(position.x, position.y, position.z);
+	obj->size = size;
+	obj->SetRotation(rot, vec3{ rot_x, rot_y, rot_z });
+	obj->color = _col;
+	pBody = App->physics->AddBody(*obj, mass);
+
+	/*If we don't add the obj to the List we'll only use it's coords
+	* without saving it in the heap and it won't be rendered. */
+	if (isVisible)
 		platforms.add(obj);
 	if (isSensor)
 	{
