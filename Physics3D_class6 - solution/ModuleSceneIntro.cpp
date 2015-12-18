@@ -41,13 +41,7 @@ bool ModuleSceneIntro::Start()
 	sizeTile.x = 4.0f;
 	sizeTile.y = 0.5f;
 	sizeTile.z = 7.0f;
-
-	float angle = 45.0f;
-
-	vec3 Rotation(0);
-	Rotation.x = 0.0f;
-	Rotation.y = 1.0f;
-	Rotation.z = 0.0f;
+	
 
 	PhysBody3D* tmp;
 	//TMP PLATFORM
@@ -75,9 +69,6 @@ bool ModuleSceneIntro::Start()
 	posPlane.x = 0.0f;
 	posPlane.y = 14.0f;
 	posPlane.z = 0.0f;*/
-	
-	//Grid
-	vec3 finalPos = CreatePlane(posPlane, sizeTile, 6, 6, angle, Rotation);
 
 
 
@@ -109,18 +100,26 @@ bool ModuleSceneIntro::Start()
 
 	//Pyramid Roads ---------------
 		
+
+
 	//Road 1
 	vec3 proadVec1 = highPyramidPos;
 	proadVec1.x += sizeTile.x* 1.5f;
 	proadVec1.z -= sizeTile.z * 2.5f;
 	//7,20,15.75
-	CreatePlaneC({proadVec1.x , proadVec1.y, proadVec1.z}, sizeTile, 9,3,Red);
+		CreatePlaneC({proadVec1.x , proadVec1.y, proadVec1.z}, sizeTile, 9,3,Red);
 	//Road 2
 
 	vec3 proadVec2 = lowPyramidPos;
 	proadVec2.x += (sizeTile.x/2 * 3);
 	proadVec2.z += (sizeTile.z * 0.3);
 	CreatePlaneC({ proadVec2.x , proadVec2.y, proadVec2.z }, sizeTile, 2, 30, Blue);
+
+	/*vec3 proadVec2 = lowPyramidPos;
+	proadVec2.x -= (sizeTile.x* 4.0f);
+	proadVec2.z += (sizeTile.z * 0.3);
+	CreatePlaneC({ proadVec2.x , proadVec2.y, proadVec2.z }, sizeTile, 2, 10, Blue);
+	*/
 	//Road 3
 	
 	vec3 proadVec3 = proadVec2;
@@ -141,29 +140,23 @@ bool ModuleSceneIntro::Start()
 	proadVec4.z += (sizeTile.z / 2 * 2);
 	proadVec4.y -= (sizeTile.z / 2);
 
-
-
-	CreatePlaneC(proadVec4, sizeTile, 10, 3, Blue);
-	//proadVec4.x = ;
-	//proadVec4.y = ;
-	//proadVec4.z = ;
-
-	
-
 	vec3 proadVec5 = proadVec4;
 	proadVec5.x += (sizeTile.x / 2 * 3);
 
 
 	CreatePlaneC(proadVec5, sizeTile, 5, 3, Blue);
 
-
-
-	/*vec3 proadVec2 = lowPyramidPos;
-	proadVec2.x -= (sizeTile.x* 4.0f);
-	proadVec2.z += (sizeTile.z * 0.3);
-	CreatePlaneC({ proadVec2.x , proadVec2.y, proadVec2.z }, sizeTile, 2, 10, Blue);
-	*/
-
+	//Connects with the beggining
+	vec3 proadVec6 = proadVec1;
+	proadVec6.x += ((sizeTile.x / 2) * 3.03);
+	CreatePlaneC(proadVec6, sizeTile, 3, 16, Blue);
+	
+	//Road3
+	vec3 proadVec7 = proadVec6;
+	proadVec7.x += ((sizeTile.x / 2) * 10.03);
+	proadVec7.z += ((sizeTile.z / 2) * 2.0);
+	CreatePlaneC(proadVec7, sizeTile, 10, 6, White);
+	
 	//Pyramid Ramps ---------------
 	
 	//Base&Ramp1
@@ -219,10 +212,6 @@ bool ModuleSceneIntro::Start()
 	//posRamp.y += sizeTile.y;
 	posRamp.z -= sizeTile.x/2;
 
-
-
-	
-
 	sizeTileRamp.z = 20;
 	PhysBody3D* rampBody;
 	float angleRamp = -45.0f;
@@ -258,14 +247,6 @@ bool ModuleSceneIntro::Start()
 	CreatePyramidNormal(posPyramid1, sizePyramid1, levels);
 	//CreateWeridSculpture(posPyramid1, sizePyramid1, levels);
 
-
-	vec3 posSlowGrid1;
-	posSlowGrid1.x = 15.0f;
-	posSlowGrid1.y = 15.0f;
-	posSlowGrid1.z = 15.0f;
-
-
-	//CreateSlowGrid(posSlowGrid1, sizeTile, 4, 4, angle, Rotation);
 
 	//Create Lap Counters
 	laps = antiCheat = 0;
