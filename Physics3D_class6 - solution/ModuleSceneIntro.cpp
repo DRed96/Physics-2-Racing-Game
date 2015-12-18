@@ -183,7 +183,7 @@ bool ModuleSceneIntro::Start()
 	vec3 proadVec7 = proadVec6;
 	proadVec7.x += ((sizeTile.x / 2) * 10.03);
 	proadVec7.z += ((sizeTile.z / 2) * 2.0);
-	CreatePlaneC(proadVec7, sizeTile, 10, 6, White);
+	CreatePlaneC(proadVec7, sizeTile, 12, 6, White);
 	
 	//Pyramid Ramps ---------------
 	
