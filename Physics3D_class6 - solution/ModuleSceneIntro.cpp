@@ -293,7 +293,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 
 //Platform Factory
 
-Cube* ModuleSceneIntro::createPlatform(vec3 position, vec3 size, PhysBody3D*& pBody, float rot, float rot_x,	float rot_y, float rot_z, bool isSensor, int check, bool isVisible, float mass)
+Cube* ModuleSceneIntro::createPlatform(vec3 position, vec3 size, PhysBody3D*& pBody, float rot, float rot_x, float rot_y, float rot_z, bool isSensor, int check, bool isVisible, float mass)
 {
 	Cube* obj = new Cube();
 
@@ -314,6 +314,12 @@ Cube* ModuleSceneIntro::createPlatform(vec3 position, vec3 size, PhysBody3D*& pB
 		pBody->check_point_num = check;
 	}
 	return obj;
+}
+
+Cube * ModuleSceneIntro::createSensor(vec3 position, vec3 size, PhysBody3D *& pBody, int check, bool isVisible, float rot, float rot_x, float rot_y, float rot_z, float mass)
+{
+	
+	return createPlatform(position, size, pBody, rot, rot_x, rot_y, rot_z, true, check, isVisible, mass);
 }
 
 bool ModuleSceneIntro::AttachPlatform(PhysBody3D* obj, PhysBody3D* obj2, Cube* cObj1, Cube* cObj2, Orientation orientation)
@@ -424,12 +430,13 @@ int ModuleSceneIntro::Checkpoint(int current)
 void ModuleSceneIntro::declareChecks()
 {
 	PhysBody3D* tmp;
-	createPlatform({ 0.0f, 3.0f, 20.0f }, { 9.0f, 1.0f, 7.0f },tmp,true,0,true);
+
+	createSensor({ 0.0f, 3.0f, 20.0f }, standardSize,tmp, 0,true);
 	sensors.add(tmp);
-	createPlatform({ 0.0f, 3.0f, 35.0f }, { 9.0f, 1.0f, 7.0f }, tmp, true,1, true);
+	createSensor({ 0.0f, 3.0f, 35.0f }, standardSize, tmp, 1, true);
 	sensors.add(tmp);
-	createPlatform({ 5.0f, 3.0f, 45.0f }, { 9.0f, 1.0f, 7.0f }, tmp, true, 2, true);
+	createSensor({ 0.0f, 3.0f, 45.0f }, standardSize, tmp, 2, true);
 	sensors.add(tmp);
-	createPlatform({ 0.0f, 3.0f, 60.0f }, { 9.0f, 1.0f, 7.0f }, tmp, true, 3, true);
+	createSensor({ 0.0f, 3.0f, 60.0f }, standardSize, tmp, 3, true);
 	sensors.add(tmp);
 }

@@ -98,8 +98,8 @@ bool ModulePlayer::Start()
 
 	vehicle = App->physics->AddVehicle(car);
 
-	//vehicle->SetPos(0, 23, 10);
-	vehicle->SetPos(0, 20.0f, 7.0f);
+	//vehicle->SetPos(0, 20, 10);
+	vehicle->SetPos(0, 0.0f, 7.0f);
 
 	timer = new Timer();
 	isStarting = true;
@@ -176,7 +176,7 @@ update_status ModulePlayer::Update(float dt)
 		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 		{
 			brake = BRAKE_POWER;
-			if (acceleration < 0.0f)//TOSOLVE 1
+			if (acceleration < 0.0f) //TOSOLVE 1
 				acceleration = -MAX_ACCELERATION;
 		}
 

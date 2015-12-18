@@ -24,7 +24,7 @@ public:
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 	//Platform Factory
 
-	bool AttachPlatform(PhysBody3D& obj, PhysBody3D& obj2, Cube& cObj1, Cube& cObj2, Orientation orientation);
+	//bool AttachPlatform(PhysBody3D& obj, PhysBody3D& obj2, Cube& cObj1, Cube& cObj2, Orientation orientation);
 	//Checkpoint creation
 	void declareChecks();
 	//Method that avoids player scoring if going backwards
@@ -32,6 +32,9 @@ public:
 	
 	Cube* createPlatform(vec3 position, vec3 size, PhysBody3D*& pBody, float rot = 0.0f, float rot_x = 1.0f,
 		float rot_y = 0.0f, float rot_z = 0.0f, bool isSensor = false, int check = -1, bool isVisible = true, float mass = 0.0f);
+
+	Cube* createSensor(vec3 position, vec3 size, PhysBody3D*& pBody, int check = -1, bool isVisible = false,
+		float rot = 0.0f, float rot_x = 1.0f, float rot_y = 0.0f, float rot_z = 0.0f, float mass = 0.0f);
 
 	bool AttachPlatform(PhysBody3D* obj, PhysBody3D* obj2, Cube* cObj1, Cube* cObj2, Orientation orientation);
 
