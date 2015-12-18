@@ -172,7 +172,7 @@ bool ModuleSceneIntro::Start()
 	//roadToWin.z += (85.0f);
 	roadToWin.z -= 30.0f;
 	roadToWin.y -= 20.0f/2;
-	createPlatformC({ roadToWin.x, roadToWin.y, roadToWin.z }, { 35.0f, 1.0f, 70.0f }, tmp, 0.0f, 0.0f, 0.0f, 0.0f, false, -1, true, Blue);
+	createPlatformC({ roadToWin.x, roadToWin.y, roadToWin.z }, { 35.0f, 1.0f, 70.0f }, tmp, 0.0f, 0.0f, 0.0f, 0.0f, false, -1, true, White);
 
 	//Connects with the beggining
 	vec3 proadVec6 = proadVec1;
