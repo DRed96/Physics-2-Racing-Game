@@ -49,9 +49,12 @@ bool ModuleSceneIntro::Start()
 	Rotation.y = 1.0f;
 	Rotation.z = 0.0f;
 
+	PhysBody3D* tmp;
 	//TMP PLATFORM
 	CreatePlaneC(vec3{ -2.5f, 25.0f, 0.0f }, sizeTile, 1, 1, Red);
-	//Plane petit 1
+			//createPlatform(vec3{ 0.5f, 50.0f, 0.0f }, standardSize,tmp,50.0f,0.0f, 1.0f,0.0f);
+	
+			//Plane petit 1
 	/*CreatePlane(posPlane, sizeTile, 1, 1);
 	posPlane.x = 0.0f;
 	posPlane.y = 8.0f;
@@ -120,16 +123,18 @@ bool ModuleSceneIntro::Start()
 	
 	vec3 rotation = {0.0f, 1.0f, 0.0f};
 
-
 	//Ramp
+	vec3 sizeTileRamp = sizeTile;
 	vec3 posRamp = mediumLowPyramidPos;
 	posRamp.x += sizeTile.x/2;
+	//posRamp.y += sizeTile.y;
 	posRamp.z -= sizeTile.x/2;
 
+	sizeTileRamp.z = 20;
 	PhysBody3D* rampBody;
-	float angleRamp = 45.0f;
+	float angleRamp = -45.0f;
 	vec3 axisRamp = {1.0f,0.0f,0.0f};
-	createPlatform(posRamp, sizeTile, rampBody, angleRamp, axisRamp.x, axisRamp.y, axisRamp.z);
+	createPlatform(posRamp, sizeTileRamp, rampBody, angleRamp, axisRamp.x, axisRamp.y, axisRamp.z);
 	
 	
 
@@ -145,7 +150,7 @@ bool ModuleSceneIntro::Start()
 
 	vec3 posPyramid1;
 	posPyramid1.x = -30.0f;
-	posPyramid1.y = 1.6f;
+	posPyramid1.y = 0.0f;
 	posPyramid1.z = 30.0f;
 	
 	vec3 sizePyramid1;
