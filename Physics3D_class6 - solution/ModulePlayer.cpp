@@ -99,8 +99,8 @@ bool ModulePlayer::Start()
 	vehicle = App->physics->AddVehicle(car);
 
 	//vehicle->SetPos(0, 23, 10);
-	vehicle->SetPos(0, 0, 7);
-	
+	vehicle->SetPos(0, 20.0f, 7.0f);
+
 	timer = new Timer();
 	isStarting = true;
 
