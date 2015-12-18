@@ -54,6 +54,12 @@ public:
 	//Checkpoint creation
 	void circuitConstruction();
 	//---------------------------
+	vec3 CreateSlowGrid(vec3 positionPlane, vec3 sizeTile, int rows, int cols, float angle = 0.0f, vec3 rotation = { 0.0f, 0.0f, 0.0f});
+
+	void CreatePyramidUpsideDown(vec3 positionPlane, vec3 sizeTile, int levels, float angle = 0.0f, vec3 rotation = { 0.0f, 0.0f, 0.0f });
+	void CreatePyramidNormal(vec3 positionPlane, vec3 sizeTile, int levels, float angle = 0.0f, vec3 rotation = { 0.0f, 0.0f, 0.0f });
+	void CreateWeridSculpture(vec3 posPyramid, vec3 sizeTile, int levels, float angle = 0.0f, vec3 rotation = { 0.0f, 0.0f, 0.0f });
+
 	
 public:
 	Cube s;
