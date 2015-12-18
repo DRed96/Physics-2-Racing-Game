@@ -144,6 +144,16 @@ vec3 proadVec1 = posPlane;
 	laps = antiCheat = 0;
 	declareChecks();
 
+	vec3 MainRoad;
+	MainRoad.x = 10.0f;
+	MainRoad.y = 0.0f;
+	MainRoad.z = 10.0f;
+
+	vec3 SizeTile;
+
+	CreatePlane(MainRoad, );
+
+
 	return ret;
 }
 
