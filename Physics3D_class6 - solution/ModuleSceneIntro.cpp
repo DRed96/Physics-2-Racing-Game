@@ -139,12 +139,14 @@ bool ModuleSceneIntro::Start()
 	vec3 pBase2 = pBase1;
 	pBase2.x += (sizeTile.x * 2);
 	pBase2.z -= (sizeTile.z/2 * 9);
+	pBase2.x -= 1.50f;
 	pBase2.y += 8.0f;
 	CreatePlaneC({ pBase2.x , pBase2.y, pBase2.z }, sizeTile, 8, 9, Red);
 	//9z,8y
 	vec3 pRamp2 = pBase2;
-	pRamp2.x ;
+	pRamp2.x += ((sizeTile.x)  * 2.5);
 	pRamp2.z += ((sizeTile.z / 2) *2 );
+	pRamp2.z += 1.75;
 	pRamp2.y += 4.0f;
 	createPlatformC({ pRamp2.x , pRamp2.y, pRamp2.z }, { 15.0f ,0.5f,6.0f }, tmp, -40.0f, 0.0f, 0.0f, 1.0f, false, -1, true, Blue);
 
