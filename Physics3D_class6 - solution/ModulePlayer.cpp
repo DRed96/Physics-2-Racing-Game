@@ -130,9 +130,7 @@ update_status ModulePlayer::PreUpdate(float dt)
 	{
 		if (victory)
 		{
-			/*
-			*Victoria
-			*/
+			//ret = UPDATE_STOP;
 		}
 		else
 		{
@@ -191,7 +189,8 @@ update_status ModulePlayer::Update(float dt)
 
 		char title[80];
 		float seconds = (timer->Read() / 1000);
-		seconds += (timer->Read() / 10000);
+		float residue = ((timer->Read() % 1000));
+		seconds += residue / 1000;
 		sprintf_s(title, "%.1f Km/h Laps: %d Current Time: %.2f", vehicle->GetKmh(), App->scene_intro->laps, seconds);
 		App->window->SetTitle(title);
 	}
@@ -201,7 +200,7 @@ update_status ModulePlayer::Update(float dt)
 
 
 
-void ModulePlayer::checkVictory(bool victory, bool finish)
+void ModulePlayer::checkVictory(bool& victory, bool& finish)
 {
 	Uint32 currentMs = timer->Read();
 	if(currentMs <= MAX_TIME && App->scene_intro->laps >= MAX_LAPS)

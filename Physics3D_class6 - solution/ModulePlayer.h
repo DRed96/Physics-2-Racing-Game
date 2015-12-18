@@ -10,7 +10,7 @@ class Timer;
 #define BRAKE_POWER 1000.0f
 //Victory Condtions
 #define MAX_LAPS 4
-#define MAX_TIME 7200
+#define MAX_TIME 720000
 class ModulePlayer : public Module
 {
 public:
@@ -24,7 +24,7 @@ public:
 	bool CleanUp();
 
 	//Check Victory
-	void checkVictory(bool _victory, bool _finish);
+	void checkVictory(bool & _victory, bool &_finish);
 public:
 	PhysVehicle3D* vehicle;
 	float turn;
