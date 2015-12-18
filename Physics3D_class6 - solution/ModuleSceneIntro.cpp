@@ -75,27 +75,35 @@ bool ModuleSceneIntro::Start()
 	
 	//Grid
 	//vec3 finalPos = CreatePlane(posPlane, sizeTile, 6, 6, angle, Rotation);
-	
-	
-	// Pyramid ---------------
-	posPlane.x += sizeTile.x/4;
-	/*0,12,0*/
-	posPlane.y = 17.0f;
-	posPlane.z += sizeTile.z/4;
+
 vec3 proadVec1 = posPlane;
-	CreatePlane(posPlane, sizeTile, 5, 5);
-	posPlane.x += sizeTile.x / 4;
-	posPlane.y = 20.0f;
-	posPlane.z += sizeTile.z / 4;
-	CreatePlane(posPlane, sizeTile, 4, 4);
-	posPlane.x += sizeTile.x / 4;
-	posPlane.y = 23.0f;
-	posPlane.z += sizeTile.z / 4;
-	CreatePlane(posPlane, sizeTile, 3, 3);
-	posPlane.x += sizeTile.x / 4;
-	posPlane.y = 26.0f;
-	posPlane.z += sizeTile.z / 4;
-	CreatePlane(posPlane, sizeTile, 2, 2);
+
+	// Piramide ---------------
+	vec3 highPyramidPos = posPlane;
+
+	highPyramidPos.x += sizeTile.x / 4;
+	highPyramidPos.y += 8.0f;
+	highPyramidPos.z += sizeTile.z / 4;
+	CreatePlane(highPyramidPos, sizeTile, 9, 9);
+
+	vec3 mediumPyramidPos = highPyramidPos;
+	mediumPyramidPos.x += sizeTile.x / 4;
+	mediumPyramidPos.y += 8.0f;
+	mediumPyramidPos.z += sizeTile.z / 4;
+	CreatePlane(mediumPyramidPos, sizeTile, 7, 7);
+	
+	vec3 mediumLowPyramidPos = mediumPyramidPos;
+	mediumLowPyramidPos.x += sizeTile.x / 4;
+	mediumLowPyramidPos.y += 8.0f;
+	mediumLowPyramidPos.z += sizeTile.z / 4;
+	CreatePlane(mediumLowPyramidPos, sizeTile, 5, 5);
+
+	vec3 lowPyramidPos = mediumLowPyramidPos;
+	lowPyramidPos.x += sizeTile.x / 4;
+	lowPyramidPos.y += 8.0f;
+	lowPyramidPos.z += sizeTile.z / 4;
+
+	CreatePlane(lowPyramidPos, sizeTile, 3, 3);
 	//  ---------------
 
 	//Pyramid Roads ---------------
@@ -104,6 +112,17 @@ vec3 proadVec1 = posPlane;
 	
 	
 	vec3 rotation = {0.0f, 1.0f, 0.0f};
+
+
+	//Ramp
+	/*vec3 posRamp = mediumLowPyramidPos;
+	PhysBody3D* rampBody;
+	float angleRamp = -30;
+	vec3 axisRamp = {1.0f,0.0f,0.0f};
+	createPlatform(posRamp, sizeTile, rampBody, angleRamp, axisRamp.x, axisRamp.y, axisRamp.z);
+	
+	*/
+
 
 	//CreateCurve30(finalPos, sizeTile, 3, rotation);
 
@@ -151,7 +170,7 @@ vec3 proadVec1 = posPlane;
 
 	vec3 SizeTile;
 
-	CreatePlane(MainRoad, );
+//	CreatePlane(MainRoad, );
 
 
 	return ret;
@@ -225,7 +244,7 @@ vec3 ModuleSceneIntro::CreatePlane(vec3 positionPlane, vec3 sizeTile, int rows, 
 
 	vec3 posTile = positionPlane;
 
-	for (i = 0; i <= rows; i++)
+	for (i = 0; i < rows; i++)
 	{
 	
 		for (j = 0; j < cols; j++)
